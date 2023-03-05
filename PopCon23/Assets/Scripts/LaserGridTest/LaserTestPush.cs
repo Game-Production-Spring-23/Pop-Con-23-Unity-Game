@@ -13,6 +13,6 @@ public class LaserTestPush : MonoBehaviour
 
     void OnMouseDown()
     {
-        tile.StartLaser(player, direction);
+       // tile.StartLaser(player, direction);
     }
 }
