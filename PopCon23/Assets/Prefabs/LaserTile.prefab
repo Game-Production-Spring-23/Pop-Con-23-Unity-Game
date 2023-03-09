@@ -541,7 +541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3624660264966661711
 Transform:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3424428937213862505
 Transform:
   m_ObjectHideFlags: 0
@@ -893,16 +893,18 @@ MonoBehaviour:
   y_cord: 0
   NWPath: {fileID: 3003224943277416639}
   NEPath: {fileID: 1724207624169018758}
-  NPath: {fileID: 0}
+  NPath: {fileID: 2014268392567220092}
   SEPath: {fileID: 1475253300284457262}
   SWPath: {fileID: 6337690310815675432}
-  SPath: {fileID: 0}
+  SPath: {fileID: 6096002469735660025}
   Player1Color: {fileID: 2100000, guid: 02973eed605bd7d47a7d30ba0ba54916, type: 2}
   Player2Color: {fileID: 2100000, guid: 3eb503f3a6d01184bbde0f77429ae654, type: 2}
   NSMirror: 0
   NESWMirror: 0
   NWSEMirror: 0
   EWMirror: 0
+  NorthStart: 0
+  SouthStart: 0
 --- !u!1 &2014268392567220092
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,12 +918,12 @@ GameObject:
   - component: {fileID: 5340632305815548994}
   - component: {fileID: 1310332749136975958}
   m_Layer: 0
-  m_Name: EPath
+  m_Name: NPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4027793579497984522
 Transform:
   m_ObjectHideFlags: 0
@@ -1618,7 +1620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7138168836258059023
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,7 +1911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1924485683841860087
 Transform:
   m_ObjectHideFlags: 0
@@ -2387,7 +2389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5800296482749470281
 Transform:
   m_ObjectHideFlags: 0
@@ -2479,12 +2481,12 @@ GameObject:
   - component: {fileID: 3173423424588668494}
   - component: {fileID: 8506201607818646264}
   m_Layer: 0
-  m_Name: WPath
+  m_Name: SPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4441930356325170353
 Transform:
   m_ObjectHideFlags: 0
@@ -2696,7 +2698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8444837842055626798
 Transform:
   m_ObjectHideFlags: 0
@@ -2793,7 +2795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2973620481147480609
 Transform:
   m_ObjectHideFlags: 0

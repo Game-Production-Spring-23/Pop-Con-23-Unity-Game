@@ -22,60 +22,79 @@ public class Tile : MonoBehaviour
     public bool NWSEMirror;
     public bool EWMirror;
 
+    public bool NorthStart;
+    public bool SouthStart;
+
     void Start()
     {
 
     }
 
-    public void StartLaser(Material player, GameObject direction)
+    public void StartLaser(Material player, string direction)
     {
-        if (direction == SEPath)
+        if (direction == "SEDirection")
         {
             Debug.Log("TEST");
-            SEPath.GetComponent<Renderer>().material = Player1Color;
-            NWPath.GetComponent<Renderer>().material = Player1Color;
+            SEPath.SetActive(true);
+            NWPath.SetActive(true);
+            SEPath.GetComponent<Renderer>().material = player;
+            NWPath.GetComponent<Renderer>().material = player;
             // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
-            ContinueLaser(1, 1, Player1Color, NWPath);
+            ContinueLaser(1, 1, player, "NWDirection");
         }
-        if (direction == SWPath)
+        else if (direction == "SWDirection")
         {
             Debug.Log("TEST");
-            SWPath.GetComponent<Renderer>().material = Player1Color;
-            NEPath.GetComponent<Renderer>().material = Player1Color;
+            SWPath.SetActive(true);
+            NEPath.SetActive(true);
+            SWPath.GetComponent<Renderer>().material = player;
+            NEPath.GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(-1, 1, Player1Color, SWPath);
+            ContinueLaser(-1, 1, player, "SWDirection");
         }
-        if (direction == NEPath)
+        else if (direction == "NEDirection")
         {
             Debug.Log("TEST");
-            NEPath.GetComponent<Renderer>().material = Player1Color;
-            SWPath.GetComponent<Renderer>().material = Player1Color;
+            NWPath.SetActive(true);
+            SWPath.SetActive(true);
+            NEPath.GetComponent<Renderer>().material = player;
+            SWPath.GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(1, -1, Player1Color, NEPath);
+            ContinueLaser(1, -1, player, "NEDirection");
         }
-        if (direction == NWPath)
+        else if (direction == "NWDirection")
         {
             Debug.Log("TEST");
-            NWPath.GetComponent<Renderer>().material = Player1Color;
-            SEPath.GetComponent<Renderer>().material = Player1Color;
+            SEPath.SetActive(true);
+            NWPath.SetActive(true);
+            NWPath.GetComponent<Renderer>().material = player;
+            SEPath.GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(-1, -1, Player1Color, NWPath);
+            ContinueLaser(-1, -1, player, "NWDirection");
         }
-        if (direction == NPath)
+        else if (direction == "NDirection")
         {
             Debug.Log("TEST");
-            NPath.GetComponent<Renderer>().material = Player1Color;
-            SPath.GetComponent<Renderer>().material = Player1Color;
+            NPath.SetActive(true);
+            SPath.SetActive(true);
+            NPath.GetComponent<Renderer>().material = player;
+            SPath.GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(0, 2, Player1Color, NPath);
+            ContinueLaser(0, -2, player, "NDirection");
         }
-        if (direction == SPath)
+        else if (direction == "SDirection")
         {
             Debug.Log("TEST");
-            SPath.GetComponent<Renderer>().material = Player1Color;
-            NPath.GetComponent<Renderer>().material = Player1Color;
+            NPath.SetActive(true);
+            SPath.SetActive(true);
+            SPath.GetComponent<Renderer>().material = player;
+            NPath.GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(0, -2, Player1Color, NPath);
+            ContinueLaser(0, 2, player, "SDirection");
+        }
+        else
+        {
+            Debug.Log(direction);
         }
 
 
@@ -134,9 +153,16 @@ public class Tile : MonoBehaviour
          */
     }
     //Tells Tile Next door according to where the laser comes out to start their laser script
-    public void ContinueLaser(int x, int y, Material player, GameObject direction)
+    public void ContinueLaser(int x, int y, Material player, string direction)
     {
-        GameManager.instance.gridArray[x_cord + x, y_cord + y].StartLaser(player, direction);
+        try 
+        {
+            GameManager.instance.gridArray[x_cord + x, y_cord + y].StartLaser(player, direction);
+        }
+        catch (System.IndexOutOfRangeException ex)
+        {
+            return;
+        }
     }
 
     public void LaserReflect()

@@ -46,17 +46,50 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-             //       gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 3f, j * 2.0f), Quaternion.identity);
+            //       gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 3f, j * 2.0f), Quaternion.identity);
 
-           //         gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 1.675f + 1.675f, j * 1.1f), Quaternion.identity);
-
+            //         gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 1.675f + 1.675f, j * 1.1f), Quaternion.identity);
         }
-        gridArray[0, 2].StartLaser(gridArray[0, 2].Player1Color, gridArray[0, 2].SEPath);
+        LaserFire();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void LaserFire()
+    {
+        for (int i = 0; i < ColumnLength; i++)
+        {
+            if (i % 2 == 0)
+            {
+                for (int j = 0; j < RowHeight; j = j + 2)
+                {
+                    gridArray[i, j].NWPath.SetActive(false);
+                    gridArray[i, j].NEPath.SetActive(false);
+                    gridArray[i, j].SWPath.SetActive(false);
+                    gridArray[i, j].SEPath.SetActive(false);
+                    gridArray[i, j].NPath.SetActive(false);
+                    gridArray[i, j].SPath.SetActive(false);
+                }
+            }
+            else
+            {
+                for (int j = 1; j < RowHeight; j = j + 2)
+                {
+                    gridArray[i, j].NWPath.SetActive(false);
+                    gridArray[i, j].NEPath.SetActive(false);
+                    gridArray[i, j].SWPath.SetActive(false);
+                    gridArray[i, j].SEPath.SetActive(false);
+                    gridArray[i, j].NPath.SetActive(false);
+                    gridArray[i, j].SPath.SetActive(false);
+                }
+            }
+        }
+
+        gridArray[8, 6].StartLaser(gridArray[8, 6].Player1Color, "NDirection");
+        gridArray[0, 0].StartLaser(gridArray[0, 0].Player2Color, "SDirection");
     }
 }
