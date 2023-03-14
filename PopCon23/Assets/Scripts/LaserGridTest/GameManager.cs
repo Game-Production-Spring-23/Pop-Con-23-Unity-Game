@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour
     public float tileHeight;
     public float tileWidth;
 
-
-
-
-
     private void Awake()
     {
         instance = this;
@@ -50,7 +46,7 @@ public class GameManager : MonoBehaviour
 
             //         gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 1.675f + 1.675f, j * 1.1f), Quaternion.identity);
         }
-        LaserFire();
+        Invoke("LaserFire", 5);
     }
 
     // Update is called once per frame

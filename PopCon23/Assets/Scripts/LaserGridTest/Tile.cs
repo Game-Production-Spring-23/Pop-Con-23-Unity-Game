@@ -17,10 +17,17 @@ public class Tile : MonoBehaviour
     public Material Player1Color;
     public Material Player2Color;
 
-    public bool NSMirror;
-    public bool NESWMirror;
-    public bool NWSEMirror;
-    public bool EWMirror;
+    public bool MirrorStage1NS;
+    public bool MirrorStage2NNESSW;
+    public bool MirrorStage3NNWSSE;
+    public bool MirrorStage4ENEWSW;
+    public bool MirrorStage5WNWESE;
+
+    public GameObject MirrorStage1NSObject;
+    public GameObject MirrorStage2NNESSWObject;
+    public GameObject MirrorStage3NNWSSEObject;
+    public GameObject MirrorStage4ENEWSWObject;
+    public GameObject MirrorStage5WNWESEObject;
 
     public bool NorthStart;
     public bool SouthStart;
