@@ -555,7 +555,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011406054002747490}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36}
 --- !u!33 &6472702386177468003
 MeshFilter:
@@ -893,12 +893,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_cord: 0
   y_cord: 0
-  NWPath: {fileID: 3003224943277416639}
-  NEPath: {fileID: 1724207624169018758}
-  NPath: {fileID: 2014268392567220092}
-  SEPath: {fileID: 1475253300284457262}
-  SWPath: {fileID: 6337690310815675432}
-  SPath: {fileID: 6096002469735660025}
+  paths:
+  - {fileID: 2014268392567220092}
+  - {fileID: 1724207624169018758}
+  - {fileID: 1475253300284457262}
+  - {fileID: 6096002469735660025}
+  - {fileID: 6337690310815675432}
+  - {fileID: 3003224943277416639}
   Player1Color: {fileID: 2100000, guid: 02973eed605bd7d47a7d30ba0ba54916, type: 2}
   Player2Color: {fileID: 2100000, guid: 3eb503f3a6d01184bbde0f77429ae654, type: 2}
   MirrorStage1NS: 0
@@ -945,7 +946,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011406054002747490}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
 --- !u!33 &2679616319080649926
 MeshFilter:
@@ -1642,7 +1643,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011406054002747490}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36}
 --- !u!33 &7119445710899888025
 MeshFilter:
@@ -1914,7 +1915,7 @@ GameObject:
   - component: {fileID: 1432077551900090055}
   - component: {fileID: 8288637948130992543}
   m_Layer: 0
-  m_Name: NNWSSE
+  m_Name: NNWSSE +2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2083,7 +2084,7 @@ GameObject:
   - component: {fileID: 2340618504277457590}
   - component: {fileID: 5070007057353102069}
   m_Layer: 0
-  m_Name: WNWESE
+  m_Name: WNWESE +1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2096,14 +2097,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5268992373489437507}
-  m_LocalRotation: {x: -0.08715578, y: 0.9961947, z: -0, w: 0}
+  m_LocalRotation: {x: -0.258819, y: 0.9659259, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1303514630719160057}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -10}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -30}
 --- !u!33 &5624374737634139927
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2716,7 +2717,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011406054002747490}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &8287113916513038619
 MeshFilter:
@@ -3006,7 +3007,7 @@ GameObject:
   - component: {fileID: 5542976828253170064}
   - component: {fileID: 7998384684264905349}
   m_Layer: 0
-  m_Name: ENEWSW
+  m_Name: ENEWSW +5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3019,14 +3020,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6417989593520503682}
-  m_LocalRotation: {x: 0.08715578, y: 0.9961947, z: 0, w: 0}
+  m_LocalRotation: {x: 0.2588191, y: 0.9659258, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1303514630719160057}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 10}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 30}
 --- !u!33 &5251500481578159144
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3440,12 +3441,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7138168836258059023}
-  - {fileID: 3424428937213862505}
   - {fileID: 4027793579497984522}
+  - {fileID: 3424428937213862505}
   - {fileID: 3624660264966661711}
-  - {fileID: 8444837842055626798}
   - {fileID: 4441930356325170353}
+  - {fileID: 8444837842055626798}
+  - {fileID: 7138168836258059023}
   m_Father: {fileID: 1303514630719160057}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3462,7 +3463,7 @@ GameObject:
   - component: {fileID: 2630065972779024944}
   - component: {fileID: 8453141470549861601}
   m_Layer: 0
-  m_Name: NNESSW
+  m_Name: NNESSW +4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

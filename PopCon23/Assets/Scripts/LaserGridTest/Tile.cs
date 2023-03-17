@@ -7,13 +7,17 @@ public class Tile : MonoBehaviour
     public int x_cord;
     public int y_cord;
 
-    public GameObject NWPath;
-    public GameObject NEPath;
-    public GameObject NPath;
-    public GameObject SEPath;
-    public GameObject SWPath;
-    public GameObject SPath;
+    private int EntryPointNum;
 
+    public GameObject[] paths;
+    // Paths goes in clockwise pattern
+    /* 0 = N 
+     * 1 = NE 
+     * 2 = SE 
+     * 3 = S 
+     * 4 = SW
+     * 5 = NW
+    */
     public Material Player1Color;
     public Material Player2Color;
 
@@ -22,6 +26,7 @@ public class Tile : MonoBehaviour
     public bool MirrorStage3NNWSSE;
     public bool MirrorStage4ENEWSW;
     public bool MirrorStage5WNWESE;
+
 
     public GameObject MirrorStage1NSObject;
     public GameObject MirrorStage2NNESSWObject;
@@ -34,131 +39,132 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-
     }
-
     public void StartLaser(Material player, string direction)
     {
         if (direction == "SEDirection")
         {
             Debug.Log("TEST");
-            SEPath.SetActive(true);
-            NWPath.SetActive(true);
-            SEPath.GetComponent<Renderer>().material = player;
-            NWPath.GetComponent<Renderer>().material = player;
+            paths[2].SetActive(true);
+            paths[2].GetComponent<Renderer>().material = player;
             // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
-            ContinueLaser(1, 1, player, "NWDirection");
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(2, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[5].GetComponent<Renderer>().material = player;
+                paths[5].SetActive(true);
+                ContinueLaser(1, 1, player, "SEDirection");
+            }
         }
         else if (direction == "SWDirection")
         {
             Debug.Log("TEST");
-            SWPath.SetActive(true);
-            NEPath.SetActive(true);
-            SWPath.GetComponent<Renderer>().material = player;
-            NEPath.GetComponent<Renderer>().material = player;
-            // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(-1, 1, player, "SWDirection");
+            paths[4].SetActive(true);
+            paths[4].GetComponent<Renderer>().material = player;
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(4, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[1].SetActive(true);
+                paths[1].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, 1, player, "SWDirection");
+            }
         }
         else if (direction == "NEDirection")
         {
             Debug.Log("TEST");
-            NWPath.SetActive(true);
-            SWPath.SetActive(true);
-            NEPath.GetComponent<Renderer>().material = player;
-            SWPath.GetComponent<Renderer>().material = player;
-            // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(1, -1, player, "NEDirection");
+            paths[1].SetActive(true);
+            paths[1].GetComponent<Renderer>().material = player;
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(1, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, -1, player, "NEDirection");
+            }
         }
         else if (direction == "NWDirection")
         {
             Debug.Log("TEST");
-            SEPath.SetActive(true);
-            NWPath.SetActive(true);
-            NWPath.GetComponent<Renderer>().material = player;
-            SEPath.GetComponent<Renderer>().material = player;
-            // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(-1, -1, player, "NWDirection");
+            paths[5].SetActive(true);
+            paths[5].GetComponent<Renderer>().material = player;
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(5, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[2].SetActive(true);
+                paths[2].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, -1, player, "NWDirection");
+            }
         }
         else if (direction == "NDirection")
         {
             Debug.Log("TEST");
-            NPath.SetActive(true);
-            SPath.SetActive(true);
-            NPath.GetComponent<Renderer>().material = player;
-            SPath.GetComponent<Renderer>().material = player;
+            paths[0].SetActive(true);
+            paths[0].GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(0, -2, player, "NDirection");
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(0, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[3].SetActive(true);
+                paths[3].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, -2, player, "NDirection");
+            }
         }
         else if (direction == "SDirection")
         {
             Debug.Log("TEST");
-            NPath.SetActive(true);
-            SPath.SetActive(true);
-            SPath.GetComponent<Renderer>().material = player;
-            NPath.GetComponent<Renderer>().material = player;
+            paths[3].SetActive(true);
+            paths[3].GetComponent<Renderer>().material = player;
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            ContinueLaser(0, 2, player, "SDirection");
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE)
+            {
+                if (LaserReflect(3, player) == false)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                paths[0].SetActive(true);
+                paths[0].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, 2, player, "SDirection");
+            }
         }
         else
         {
             Debug.Log(direction);
         }
-
-
-
-        /* //Begins Direction Checking
-         if (direction == "north" || direction == "south")
-         {
-             //If North Direction
-             if (direction == "north")
-             {
-                 //Sets South Direction (North STARTS in south, etc)
-                 SPath.SetActive(true);
-                 SPath.GetComponent<Renderer>().material = Player1Color;
-                 //If Mirror Active, Output would be WEST
-                 if (NWSEMirror == true)
-                 {
-                     WPath.SetActive(true);
-                     WPath.GetComponent<Renderer>().material = Player1Color;
-                     ContinueLaser(-1, 0, "red", "west");
-                 }
-                 //If Mirror Active Output would be EAST
-                 else if (NESWMirror == true)
-                 {
-                 }
-                 //If No mirror Continues NORTH
-                 else
-                 {
-                     NPath.SetActive(true);
-                     NPath.GetComponent<Renderer>().material = Player1Color;
-                     ContinueLaser(0, -1, "red", "north");
-                 }
-             }
-             //If South Direction
-             if (direction == "south")
-             {
-                 SPath.GetComponent<Renderer>().material = Player1Color;
-             }
-         }
-         if (direction == "east" || direction == "west")
-         {
-             //If East
-             if (direction == "east")
-             {
-                 EPath.GetComponent<Renderer>().material = Player1Color;
-             }
-             // If West
-             if (direction == "west")
-             {
-                 WPath.SetActive(true);
-                 WPath.GetComponent<Renderer>().material = Player1Color;
-                 EPath.SetActive(true);
-                 EPath.GetComponent<Renderer>().material = Player1Color;
-                 ContinueLaser(-1, 0, "red", "west");
-             }
-         }
-         */
     }
+
     //Tells Tile Next door according to where the laser comes out to start their laser script
     public void ContinueLaser(int x, int y, Material player, string direction)
     {
@@ -171,9 +177,199 @@ public class Tile : MonoBehaviour
             return;
         }
     }
-
-    public void LaserReflect()
+    public bool LaserReflect(int entry, Material player)
     {
+        if (entry == 0)
+        {
+            if (MirrorStage2NNESSW)
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1,-1,player, "NEDirection");
+                return true;
+            }
+            if (MirrorStage3NNWSSE)
+            {
+                paths[2].SetActive(true);
+                paths[2].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, -1, player, "NWDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[5].SetActive(true);
+                paths[5].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, 1, player, "SEDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[1].SetActive(true);
+                paths[1].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, 1, player, "SWDirection");
+                return true;
+            }
+        }
+        else if (entry == 1)
+        {
+            if (MirrorStage1NS)
+            {
+                paths[2].SetActive(true);
+                paths[2].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, -1, player, "NWDirection");
+                return true;
+            }
+            if (MirrorStage2NNESSW)
+            {
+                paths[3].SetActive(true);
+                paths[3].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, -2, player, "NDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[5].SetActive(true);
+                paths[5].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, 1, player, "SEDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[0].SetActive(true);
+                paths[0].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, 2, player, "SDirection");
+                return true;
+            }
+        }
+        else if (entry == 2)
+        {
+            if (MirrorStage1NS)
+            {
+                paths[1].SetActive(true);
+                paths[1].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, 1, player, "SWDirection");
+                return true;
+            }
+            if (MirrorStage3NNWSSE)
+            {
+                paths[0].SetActive(true);
+                paths[0].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, 2, player, "SDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[3].SetActive(true);
+                paths[3].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, -2, player, "NDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, -1, player, "NEDirection");
+                return true;
+            }
+        }
+        else if (entry == 3)
+        {
+            if (MirrorStage2NNESSW)
+            {
+                paths[1].SetActive(true);
+                paths[1].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, 1, player, "SWDirection");
+                return true;
+            }
+            if (MirrorStage3NNWSSE)
+            {
+                paths[5].SetActive(true);
+                paths[5].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, 1, player, "SEDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[2].SetActive(true);
+                paths[2].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, -1, player, "NWDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, -1, player, "NEDirection");
+                return true;
+            }
+        }
+        else if (entry == 4)
+        {
+            if (MirrorStage1NS)
+            {
+                paths[5].SetActive(true);
+                paths[5].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, 1, player, "SEDirection");
+                return true;
+            }
+            if (MirrorStage2NNESSW)
+            {
+                paths[0].SetActive(true);
+                paths[0].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, 2, player, "SDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, -1, player, "NEDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[3].SetActive(true);
+                paths[3].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, -2, player, "NDirection");
+                return true;
+            }
+        }
+        else if (entry == 5)
+        {
+            if (MirrorStage1NS)
+            {
+                paths[4].SetActive(true);
+                paths[4].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, -1, player, "NEDirection");
+                return true;
+            }
+            if (MirrorStage3NNWSSE)
+            {
+                paths[0].SetActive(true);
+                paths[0].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, 2, player, "SDirection");
+                return true;
+            }
+            if (MirrorStage4ENEWSW)
+            {
+                paths[5].SetActive(true);
+                paths[5].GetComponent<Renderer>().material = player;
+                ContinueLaser(1, 1, player, "SEDirection");
+                return true;
+            }
+            if (MirrorStage5WNWESE)
+            {
+                paths[1].SetActive(true);
+                paths[1].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, 1, player, "SWDirection");
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
     }
 
 

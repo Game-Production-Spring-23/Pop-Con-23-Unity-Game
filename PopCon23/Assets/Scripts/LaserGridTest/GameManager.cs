@@ -63,29 +63,29 @@ public class GameManager : MonoBehaviour
             {
                 for (int j = 0; j < RowHeight; j = j + 2)
                 {
-                    gridArray[i, j].NWPath.SetActive(false);
-                    gridArray[i, j].NEPath.SetActive(false);
-                    gridArray[i, j].SWPath.SetActive(false);
-                    gridArray[i, j].SEPath.SetActive(false);
-                    gridArray[i, j].NPath.SetActive(false);
-                    gridArray[i, j].SPath.SetActive(false);
+                    gridArray[i, j].paths[5].SetActive(false);
+                    gridArray[i, j].paths[1].SetActive(false);
+                    gridArray[i, j].paths[4].SetActive(false);
+                    gridArray[i, j].paths[2].SetActive(false);
+                    gridArray[i, j].paths[0].SetActive(false);
+                    gridArray[i, j].paths[3].SetActive(false);
                 }
             }
             else
             {
                 for (int j = 1; j < RowHeight; j = j + 2)
                 {
-                    gridArray[i, j].NWPath.SetActive(false);
-                    gridArray[i, j].NEPath.SetActive(false);
-                    gridArray[i, j].SWPath.SetActive(false);
-                    gridArray[i, j].SEPath.SetActive(false);
-                    gridArray[i, j].NPath.SetActive(false);
-                    gridArray[i, j].SPath.SetActive(false);
+                    gridArray[i, j].paths[5].SetActive(false);
+                    gridArray[i, j].paths[1].SetActive(false);
+                    gridArray[i, j].paths[4].SetActive(false);
+                    gridArray[i, j].paths[2].SetActive(false);
+                    gridArray[i, j].paths[0].SetActive(false);
+                    gridArray[i, j].paths[3].SetActive(false);
                 }
             }
         }
 
         gridArray[8, 6].StartLaser(gridArray[8, 6].Player1Color, "NDirection");
-        gridArray[0, 0].StartLaser(gridArray[0, 0].Player2Color, "SDirection");
+        gridArray[0, 0].StartLaser(gridArray[0, 0].Player2Color, "SDirection"); 
     }
 }

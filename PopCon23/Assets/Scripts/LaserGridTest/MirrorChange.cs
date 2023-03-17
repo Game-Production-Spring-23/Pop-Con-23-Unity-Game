@@ -46,6 +46,7 @@ public class MirrorChange : MonoBehaviour
 
         }
         DisplayMirror();
+        GameManager.instance.LaserFire();
     }
     public void DisplayMirror()
     {
