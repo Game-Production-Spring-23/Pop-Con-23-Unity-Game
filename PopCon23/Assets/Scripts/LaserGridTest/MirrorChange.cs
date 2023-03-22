@@ -39,6 +39,22 @@ public class MirrorChange : MonoBehaviour
         else if (Tile.MirrorStage5WNWESE == true)
         {
             Tile.MirrorStage5WNWESE = false;
+            Tile.MirrorStage6NorthSplitter = true;
+        }
+        else if (Tile.MirrorStage6NorthSplitter == true)
+        {
+            Tile.MirrorStage6NorthSplitter = false;
+            Tile.MirrorStage7SouthSplitter = true;
+        }
+        else if (Tile.MirrorStage7SouthSplitter == true)
+        {
+            Tile.MirrorStage7SouthSplitter = false;
+            Tile.MirrorStage8Blocker = true;
+        }
+        else if (Tile.MirrorStage8Blocker == true)
+        {
+            Tile.MirrorStage8Blocker = false;
+
         }
         else
         {
@@ -55,6 +71,9 @@ public class MirrorChange : MonoBehaviour
         Tile.MirrorStage3NNWSSEObject.SetActive(false);
         Tile.MirrorStage4ENEWSWObject.SetActive(false);
         Tile.MirrorStage5WNWESEObject.SetActive(false);
+        Tile.MirrorStage6NorthSplitterObject.SetActive(false);
+        Tile.MirrorStage7SouthSplitterObject.SetActive(false);
+        Tile.MirrorStage8BlockerObject.SetActive(false);
 
         if (Tile.MirrorStage1NS == true)
         {
@@ -75,6 +94,18 @@ public class MirrorChange : MonoBehaviour
         if (Tile.MirrorStage5WNWESE == true)
         {
             Tile.MirrorStage5WNWESEObject.SetActive(true);
+        }
+        if (Tile.MirrorStage6NorthSplitter == true)
+        {
+            Tile.MirrorStage6NorthSplitterObject.SetActive(true);
+        }
+        if (Tile.MirrorStage7SouthSplitter == true)
+        {
+            Tile.MirrorStage7SouthSplitterObject.SetActive(true);
+        }
+        if (Tile.MirrorStage8Blocker == true)
+        {
+            Tile.MirrorStage8BlockerObject.SetActive(true);
         }
     }
 }
