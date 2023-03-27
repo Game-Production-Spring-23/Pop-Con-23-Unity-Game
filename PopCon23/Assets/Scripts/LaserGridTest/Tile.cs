@@ -182,6 +182,9 @@ public class Tile : MonoBehaviour
         {
             return;
         }
+        catch (System.StackOverflowException ex){
+            return;
+        }
     }
     public bool LaserReflect(int entry, Material player)
     {
@@ -363,10 +366,10 @@ public class Tile : MonoBehaviour
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
-                ContinueLaser(1, -1, player, "NEDirection");
-                return true;
+                paths[2].SetActive(true);
+                paths[2].GetComponent<Renderer>().material = player;
+                ContinueLaser(-1, -1, player, "NWDirection");
+                return true; // FIX BROKE
             }
             if (MirrorStage5WNWESE)
             {
@@ -396,9 +399,9 @@ public class Tile : MonoBehaviour
             }
             if (MirrorStage3NNWSSE)
             {
-                paths[0].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
-                ContinueLaser(0, 2, player, "SDirection");
+                paths[3].SetActive(true);
+                paths[3].GetComponent<Renderer>().material = player;
+                ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
