@@ -1052,7 +1052,7 @@ Transform:
   m_GameObject: {fileID: 1990599282665513227}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5022469685748606704}
@@ -1099,6 +1099,7 @@ MonoBehaviour:
   - {fileID: 3003224943277416639}
   Player1Color: {fileID: 2100000, guid: 02973eed605bd7d47a7d30ba0ba54916, type: 2}
   Player2Color: {fileID: 2100000, guid: 3eb503f3a6d01184bbde0f77429ae654, type: 2}
+  Crossbeams: {fileID: 2100000, guid: cff0ef7ba76475341914e96bb3840e97, type: 2}
   MirrorStage1NS: 0
   MirrorStage2NNESSW: 0
   MirrorStage3NNWSSE: 0

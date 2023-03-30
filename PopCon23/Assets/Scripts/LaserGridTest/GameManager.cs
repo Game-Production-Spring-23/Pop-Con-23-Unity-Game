@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ColumnLength; i++)
         {
             if (i % 2 == 0) {
-                for (int j = 0; j < RowHeight; j = j + 2)
+                for (int j = 0; j < RowHeight ; j = j + 2)
                 {
                     gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * tileWidth, j * tileHeight), Quaternion.identity);
                     gridArray[i, j].x_cord = i;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                for (int j = 1; j < RowHeight; j = j + 2)
+                for (int j = 1; j < RowHeight ; j = j + 2)
                 {
                     gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * tileWidth, j * tileHeight), Quaternion.identity);
                     gridArray[i, j].x_cord = i;
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        gridArray[8, 6].StartLaser(gridArray[8, 6].Player1Color, "NDirection");
-        gridArray[0, 0].StartLaser(gridArray[0, 0].Player2Color, "SDirection"); 
+        gridArray[10, 12].StartLaser(gridArray[10, 12].Player1Color, "NDirection");
+        gridArray[2, 0].StartLaser(gridArray[2, 0].Player2Color, "SDirection"); 
     }
 }

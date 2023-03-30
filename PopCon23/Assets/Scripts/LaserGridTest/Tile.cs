@@ -20,6 +20,7 @@ public class Tile : MonoBehaviour
     */
     public Material Player1Color;
     public Material Player2Color;
+    public Material Crossbeams;
 
     public bool MirrorStage1NS;
     public bool MirrorStage2NNESSW;
@@ -50,9 +51,7 @@ public class Tile : MonoBehaviour
     {
         if (direction == "SEDirection")
         {
-            Debug.Log("TEST");
-            paths[2].SetActive(true);
-            paths[2].GetComponent<Renderer>().material = player;
+            LaserTurnOn(2, player);
             // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
@@ -63,16 +62,13 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[5].GetComponent<Renderer>().material = player;
-                paths[5].SetActive(true);
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
             }
         }
         else if (direction == "SWDirection")
         {
-            Debug.Log("TEST");
-            paths[4].SetActive(true);
-            paths[4].GetComponent<Renderer>().material = player;
+            LaserTurnOn(4, player);
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
                 if (LaserReflect(4, player) == false)
@@ -82,16 +78,13 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[1].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
                 ContinueLaser(-1, 1, player, "SWDirection");
             }
         }
         else if (direction == "NEDirection")
         {
-            Debug.Log("TEST");
-            paths[1].SetActive(true);
-            paths[1].GetComponent<Renderer>().material = player;
+            LaserTurnOn(1, player);
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
                 if (LaserReflect(1, player) == false)
@@ -101,16 +94,13 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
                 ContinueLaser(1, -1, player, "NEDirection");
             }
         }
         else if (direction == "NWDirection")
         {
-            Debug.Log("TEST");
-            paths[5].SetActive(true);
-            paths[5].GetComponent<Renderer>().material = player;
+            LaserTurnOn(5, player);
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
                 if (LaserReflect(5, player) == false)
@@ -120,16 +110,13 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[2].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
             }
         }
         else if (direction == "NDirection")
         {
-            Debug.Log("TEST");
-            paths[0].SetActive(true);
-            paths[0].GetComponent<Renderer>().material = player;
+            LaserTurnOn(0, player);
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
@@ -140,16 +127,13 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[3].SetActive(true);
-                paths[3].GetComponent<Renderer>().material = player;
+              LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
             }
         }
         else if (direction == "SDirection")
         {
-            Debug.Log("TEST");
-            paths[3].SetActive(true);
-            paths[3].GetComponent<Renderer>().material = player;
+            LaserTurnOn(3, player);
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
             if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
             {
@@ -160,8 +144,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                paths[0].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
+                LaserTurnOn(0, player);
                 ContinueLaser(0, 2, player, "SDirection");
             }
         }
@@ -192,37 +175,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage2NNESSW)
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
                 ContinueLaser(1,-1,player, "NEDirection");
                 return true;
             }
             if (MirrorStage3NNWSSE)
             {
-                paths[2].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[1].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
             if (MirrorStage6NorthSplitter) {
-                paths[2].SetActive(true);
-                paths[4].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
+                LaserTurnOn(2, player);
                 ContinueLaser(1,-1,player, "NEDirection");
                 ContinueLaser(-1, -1, player, "NWDirection");
                 return true;
@@ -232,37 +209,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage1NS)
             {
-                paths[2].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
                 return true;
             }
             if (MirrorStage2NNESSW)
             {
-                paths[3].SetActive(true);
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[0].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
+                LaserTurnOn(0, player);
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
             }
             if (MirrorStage7SouthSplitter) {
-                paths[3].SetActive(true);
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(3, player);
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
@@ -272,37 +243,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage1NS)
             {
-                paths[1].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
             if (MirrorStage3NNWSSE)
             {
-                paths[0].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
+                LaserTurnOn(0, player);
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[3].SetActive(true);
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
                 ContinueLaser(1, -1, player, "NEDirection");
                 return true;
             }
             if (MirrorStage6NorthSplitter) {
-                paths[0].SetActive(true);
-                paths[4].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
+                LaserTurnOn(0, player);
                 ContinueLaser(1,-1,player, "NEDirection");
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
@@ -312,37 +277,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage2NNESSW)
             {
-                paths[1].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
             if (MirrorStage3NNWSSE)
             {
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[2].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
                 return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
                 ContinueLaser(1, -1, player, "NEDirection");
                 return true;
             }
             if (MirrorStage7SouthSplitter) {
-                paths[1].SetActive(true);
-                paths[5].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
@@ -352,37 +311,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage1NS)
             {
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 return true;
             }
             if (MirrorStage2NNESSW)
             {
-                paths[0].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
+                LaserTurnOn(0, player);
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[2].SetActive(true);
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
-                return true; // FIX BROKE
+                return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[3].SetActive(true);
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
             if (MirrorStage6NorthSplitter) {
-                paths[0].SetActive(true);
-                paths[2].SetActive(true);
-                paths[0].GetComponent<Renderer>().material = player;
-                paths[2].GetComponent<Renderer>().material = player;
+                LaserTurnOn(0, player);
+                LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
@@ -392,37 +345,31 @@ public class Tile : MonoBehaviour
         {
             if (MirrorStage1NS)
             {
-                paths[4].SetActive(true);
-                paths[4].GetComponent<Renderer>().material = player;
+                LaserTurnOn(4, player);
                 ContinueLaser(1, -1, player, "NEDirection");
                 return true;
             }
             if (MirrorStage3NNWSSE)
             {
-                paths[3].SetActive(true);
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
             if (MirrorStage4ENEWSW)
             {
-                paths[5].SetActive(true);
-                paths[5].GetComponent<Renderer>().material = player;
+                LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
                 return true;
             }
             if (MirrorStage5WNWESE)
             {
-                paths[1].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
             if (MirrorStage7SouthSplitter) {
-                paths[1].SetActive(true);
-                paths[3].SetActive(true);
-                paths[1].GetComponent<Renderer>().material = player;
-                paths[3].GetComponent<Renderer>().material = player;
+                LaserTurnOn(1, player);
+                LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
@@ -434,7 +381,16 @@ public class Tile : MonoBehaviour
         }
         return false;
     }
-
+    public void LaserTurnOn(int entryPoint, Material player)
+    {
+        if (paths[entryPoint].activeSelf == true) {
+            paths[entryPoint].GetComponent<Renderer>().material = Crossbeams;
+        }
+        else {
+            paths[entryPoint].SetActive(true);
+            paths[entryPoint].GetComponent<Renderer>().material = player;
+        }
+    }
 
 
 
