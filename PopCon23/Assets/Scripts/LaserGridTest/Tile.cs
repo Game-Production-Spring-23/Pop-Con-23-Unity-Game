@@ -51,108 +51,103 @@ public class Tile : MonoBehaviour
     }
     public void StartLaser(Material player, string direction)
     {
-        if (direction == "SEDirection")
-        {
-            LaserTurnOn(2, player);
-            // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(2, player) == false)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-            }
-        }
-        else if (direction == "SWDirection")
-        {
-            LaserTurnOn(4, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(4, player) == false)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                LaserTurnOn(1, player);
-                ContinueLaser(-1, 1, player, "SWDirection");
-            }
-        }
-        else if (direction == "NEDirection")
-        {
-            LaserTurnOn(1, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(1, player) == false)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                LaserTurnOn(4, player);
-                ContinueLaser(1, -1, player, "NEDirection");
-            }
-        }
-        else if (direction == "NWDirection")
-        {
-            LaserTurnOn(5, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(5, player) == false)
-                {
-                    return;
-                }
-            }
-            else
-            {
+        switch (direction){
+            case "SEDirection":
                 LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-            }
-        }
-        else if (direction == "NDirection")
-        {
-            LaserTurnOn(0, player);
-            // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(0, player) == false)
+                // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
-                    return;
+                    if (LaserReflect(2, player) == false)
+                    {
+                        return;
+                    }
                 }
-            }
-            else
-            {
-              LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-            }
-        }
-        else if (direction == "SDirection")
-        {
-            LaserTurnOn(3, player);
-            // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
-            {
-                if (LaserReflect(3, player) == false)
+                else
                 {
-                    return;
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
                 }
-            }
-            else
-            {
+            break;
+            case "SWDirection":
+                LaserTurnOn(4, player);
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
+                {
+                    if (LaserReflect(4, player) == false)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    LaserTurnOn(1, player);
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                }
+            break;
+            case "NEDirection":
+                LaserTurnOn(1, player);
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
+                {
+                    if (LaserReflect(1, player) == false)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    LaserTurnOn(4, player);
+                    ContinueLaser(1, -1, player, "NEDirection");
+                }
+            break;
+            case "NWDirection":
+                LaserTurnOn(5, player);
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
+                {
+                    if (LaserReflect(5, player) == false)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                }
+            break;
+            case "NDirection":
                 LaserTurnOn(0, player);
-                ContinueLaser(0, 2, player, "SDirection");
-            }
-        }
-        else
-        {
+                // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
+                {
+                    if (LaserReflect(0, player) == false)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                }
+            break;
+            case "SDirection":
+                LaserTurnOn(3, player);
+                // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
+                if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
+                {
+                    if (LaserReflect(3, player) == false)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    LaserTurnOn(0, player);
+                    ContinueLaser(0, 2, player, "SDirection");
+                }
+            break;
+            default:
             Debug.Log(direction);
+            break;
         }
     }
 
@@ -173,213 +168,205 @@ public class Tile : MonoBehaviour
     }
     public bool LaserReflect(int entry, Material player)
     {
-        if (entry == 0)
-        {
-            if (MirrorStage2NNESSW)
-            {
-                LaserTurnOn(4, player);
-                ContinueLaser(1,-1,player, "NEDirection");
-                return true;
-            }
-            if (MirrorStage3NNWSSE)
-            {
-                LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(1, player);
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-            if (MirrorStage7NorthSplitter) {
-                LaserTurnOn(4, player);
-                LaserTurnOn(2, player);
-                ContinueLaser(1,-1,player, "NEDirection");
-                ContinueLaser(-1, -1, player, "NWDirection");
-                return true;
-            }
-        }
-        else if (entry == 1)
-        {
-            if (MirrorStage1NS)
-            {
-                LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-                return true;
-            }
-            if (MirrorStage2NNESSW)
-            {
-                LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(0, player);
-                ContinueLaser(0, 2, player, "SDirection");
-                return true;
-            }
-            if (MirrorStage8SouthSplitter) {
-                LaserTurnOn(3, player);
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                ContinueLaser(0, -2, player, "NDirection");
-                return true;
-            }
-        }
-        else if (entry == 2)
-        {
-            if (MirrorStage1NS)
-            {
-                LaserTurnOn(1, player);
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-            if (MirrorStage3NNWSSE)
-            {
-                LaserTurnOn(0, player);
-                ContinueLaser(0, 2, player, "SDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(4, player);
-                ContinueLaser(1, -1, player, "NEDirection");
-                return true;
-            }
-            if (MirrorStage7NorthSplitter) {
-                LaserTurnOn(4, player);
-                LaserTurnOn(0, player);
-                ContinueLaser(1,-1,player, "NEDirection");
-                ContinueLaser(0, 2, player, "SDirection");
-                return true;
-            }
-        }
-        else if (entry == 3)
-        {
-            if (MirrorStage2NNESSW)
-            {
-                LaserTurnOn(1, player);
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-            if (MirrorStage3NNWSSE)
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(4, player);
-                ContinueLaser(1, -1, player, "NEDirection");
-                return true;
-            }
-            if (MirrorStage8SouthSplitter) {
-                LaserTurnOn(1, player);
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-        }
-        else if (entry == 4)
-        {
-            if (MirrorStage1NS)
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                return true;
-            }
-            if (MirrorStage2NNESSW)
-            {
-                LaserTurnOn(0, player);
-                ContinueLaser(0, 2, player, "SDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-                return true;
-            }
-            if (MirrorStage7NorthSplitter) {
-                LaserTurnOn(0, player);
-                LaserTurnOn(2, player);
-                ContinueLaser(-1, -1, player, "NWDirection");
-                ContinueLaser(0, 2, player, "SDirection");
-                return true;
-            }
-        }
-        else if (entry == 5)
-        {
-            if (MirrorStage1NS)
-            {
-                LaserTurnOn(4, player);
-                ContinueLaser(1, -1, player, "NEDirection");
-                return true;
-            }
-            if (MirrorStage3NNWSSE)
-            {
-                LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-                return true;
-            }
-            if (MirrorStage4ENEWSW)
-            {
-                LaserTurnOn(5, player);
-                ContinueLaser(1, 1, player, "SEDirection");
-                return true;
-            }
-            if (MirrorStage5WNWESE)
-            {
-                LaserTurnOn(1, player);
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-            if (MirrorStage8SouthSplitter) {
-                LaserTurnOn(1, player);
-                LaserTurnOn(3, player);
-                ContinueLaser(0, -2, player, "NDirection");
-                ContinueLaser(-1, 1, player, "SWDirection");
-                return true;
-            }
-        }
-        else
-        {
-            return false;
+        switch (entry){
+            case 0:
+                if (MirrorStage2NNESSW)
+                {
+                    LaserTurnOn(4, player);
+                    ContinueLaser(1,-1,player, "NEDirection");
+                    return true;
+                }
+                if (MirrorStage3NNWSSE)
+                {
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                    return true;
+                }
+                if (MirrorStage4ENEWSW)
+                {
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    return true;
+                }
+                if (MirrorStage5WNWESE)
+                {
+                    LaserTurnOn(1, player);
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                    return true;
+                }
+                if (MirrorStage7NorthSplitter) {
+                   LaserTurnOn(4, player);
+                   LaserTurnOn(2, player);
+                   ContinueLaser(1,-1,player, "NEDirection");
+                   ContinueLaser(-1, -1, player, "NWDirection");
+                   return true;
+                }
+            break;
+            case 1:
+                if (MirrorStage1NS)
+                {
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                    return true;
+                }
+                if (MirrorStage2NNESSW)
+                {
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                    return true;
+                }
+                if (MirrorStage5WNWESE)
+                {
+                    LaserTurnOn(0, player);
+                    ContinueLaser(0, 2, player, "SDirection");
+                    return true;
+                }
+                if (MirrorStage6EW)
+                {
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    return true;
+                }
+                if (MirrorStage8SouthSplitter) {
+                    LaserTurnOn(3, player);
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    ContinueLaser(0, -2, player, "NDirection");
+                    return true;
+                }
+            break;
+            case 2:
+                if (MirrorStage1NS)
+                {
+                   LaserTurnOn(1, player);
+                   ContinueLaser(-1, 1, player, "SWDirection");
+                   return true;
+                }
+                if (MirrorStage3NNWSSE)
+                {
+                    LaserTurnOn(0, player);
+                    ContinueLaser(0, 2, player, "SDirection");
+                    return true;
+                }
+                if (MirrorStage4ENEWSW)
+                {
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                    return true;
+                }
+                if (MirrorStage6EW)
+                {
+                    LaserTurnOn(4, player);
+                    ContinueLaser(1, -1, player, "NEDirection");
+                    return true;
+                }
+                if (MirrorStage7NorthSplitter) {
+                    LaserTurnOn(4, player);
+                    LaserTurnOn(0, player);
+                    ContinueLaser(1,-1,player, "NEDirection");
+                    ContinueLaser(0, 2, player, "SDirection");
+                    return true;
+                }
+            break;
+            case 3:
+                if (MirrorStage2NNESSW)
+                {
+                    LaserTurnOn(1, player);
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                    return true;
+                }
+                if (MirrorStage3NNWSSE)
+                {
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    return true;
+                }
+                if (MirrorStage4ENEWSW)
+                {
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                    return true;
+                }
+                if (MirrorStage5WNWESE)
+                {
+                    LaserTurnOn(4, player);
+                    ContinueLaser(1, -1, player, "NEDirection");
+                    return true;
+                }
+                if (MirrorStage8SouthSplitter) {
+                    LaserTurnOn(1, player);
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                    return true;
+                }
+            break;
+            case 4:
+                if (MirrorStage1NS)
+                {
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    return true;
+                }
+                if (MirrorStage2NNESSW)
+                {
+                    LaserTurnOn(0, player);
+                    ContinueLaser(0, 2, player, "SDirection");
+                    return true;
+                }
+                if (MirrorStage5WNWESE)
+                {
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                    return true;
+                }
+                if (MirrorStage6EW)
+                {
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                    return true;
+                }
+                if (MirrorStage7NorthSplitter) {
+                    LaserTurnOn(0, player);
+                    LaserTurnOn(2, player);
+                    ContinueLaser(-1, -1, player, "NWDirection");
+                    ContinueLaser(0, 2, player, "SDirection");
+                    return true;
+                }
+            break;
+            case 5:
+                if (MirrorStage1NS)
+                {
+                    LaserTurnOn(4, player);
+                    ContinueLaser(1, -1, player, "NEDirection");
+                    return true;
+                }
+                if (MirrorStage3NNWSSE)
+                {
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                    return true;
+                }
+                if (MirrorStage4ENEWSW)
+                {
+                    LaserTurnOn(5, player);
+                    ContinueLaser(1, 1, player, "SEDirection");
+                    return true;
+                }
+                if (MirrorStage6EW)
+                {
+                    LaserTurnOn(1, player);
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                    return true;
+                }
+                if (MirrorStage8SouthSplitter) {
+                    LaserTurnOn(1, player);
+                    LaserTurnOn(3, player);
+                    ContinueLaser(0, -2, player, "NDirection");
+                    ContinueLaser(-1, 1, player, "SWDirection");
+                    return true;
+                }
+            break;
         }
         return false;
     }
