@@ -241,6 +241,9 @@ MonoBehaviour:
   RowHeight: 13
   tileHeight: 0.66
   tileWidth: 0.99
+  InventoryItem: {fileID: 7413834032937931811, guid: 5fc6082742089874a94e66ca8012fe08, type: 3}
+  Player1Inventory: []
+  Player2Inventory: []
 --- !u!4 &769214073
 Transform:
   m_ObjectHideFlags: 0

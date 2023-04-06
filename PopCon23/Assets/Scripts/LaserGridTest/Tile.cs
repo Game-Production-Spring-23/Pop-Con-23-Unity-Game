@@ -27,9 +27,10 @@ public class Tile : MonoBehaviour
     public bool MirrorStage3NNWSSE;
     public bool MirrorStage4ENEWSW;
     public bool MirrorStage5WNWESE;
-    public bool MirrorStage6NorthSplitter;
-    public bool MirrorStage7SouthSplitter;
-    public bool MirrorStage8Blocker;
+    public bool MirrorStage6EW;
+    public bool MirrorStage7NorthSplitter;
+    public bool MirrorStage8SouthSplitter;
+    public bool MirrorStage9Blocker;
 
 
     public GameObject MirrorStage1NSObject;
@@ -37,9 +38,10 @@ public class Tile : MonoBehaviour
     public GameObject MirrorStage3NNWSSEObject;
     public GameObject MirrorStage4ENEWSWObject;
     public GameObject MirrorStage5WNWESEObject;
-    public GameObject MirrorStage6NorthSplitterObject;
-    public GameObject MirrorStage7SouthSplitterObject;
-    public GameObject MirrorStage8BlockerObject;
+    public GameObject MirrorStage6EWObject;
+    public GameObject MirrorStage7NorthSplitterObject;
+    public GameObject MirrorStage8SouthSplitterObject;
+    public GameObject MirrorStage9BlockerObject;
 
     public bool NorthStart;
     public bool SouthStart;
@@ -53,7 +55,7 @@ public class Tile : MonoBehaviour
         {
             LaserTurnOn(2, player);
             // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(2, player) == false)
                 {
@@ -69,7 +71,7 @@ public class Tile : MonoBehaviour
         else if (direction == "SWDirection")
         {
             LaserTurnOn(4, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(4, player) == false)
                 {
@@ -85,7 +87,7 @@ public class Tile : MonoBehaviour
         else if (direction == "NEDirection")
         {
             LaserTurnOn(1, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(1, player) == false)
                 {
@@ -101,7 +103,7 @@ public class Tile : MonoBehaviour
         else if (direction == "NWDirection")
         {
             LaserTurnOn(5, player);
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(5, player) == false)
                 {
@@ -118,7 +120,7 @@ public class Tile : MonoBehaviour
         {
             LaserTurnOn(0, player);
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(0, player) == false)
                 {
@@ -135,7 +137,7 @@ public class Tile : MonoBehaviour
         {
             LaserTurnOn(3, player);
             // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
-            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE|| MirrorStage6NorthSplitter || MirrorStage7SouthSplitter || MirrorStage8Blocker)
+            if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
             {
                 if (LaserReflect(3, player) == false)
                 {
@@ -197,7 +199,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
-            if (MirrorStage6NorthSplitter) {
+            if (MirrorStage7NorthSplitter) {
                 LaserTurnOn(4, player);
                 LaserTurnOn(2, player);
                 ContinueLaser(1,-1,player, "NEDirection");
@@ -231,7 +233,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(0, 2, player, "SDirection");
                 return true;
             }
-            if (MirrorStage7SouthSplitter) {
+            if (MirrorStage8SouthSplitter) {
                 LaserTurnOn(3, player);
                 LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
@@ -265,7 +267,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(1, -1, player, "NEDirection");
                 return true;
             }
-            if (MirrorStage6NorthSplitter) {
+            if (MirrorStage7NorthSplitter) {
                 LaserTurnOn(4, player);
                 LaserTurnOn(0, player);
                 ContinueLaser(1,-1,player, "NEDirection");
@@ -299,7 +301,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(1, -1, player, "NEDirection");
                 return true;
             }
-            if (MirrorStage7SouthSplitter) {
+            if (MirrorStage8SouthSplitter) {
                 LaserTurnOn(1, player);
                 LaserTurnOn(5, player);
                 ContinueLaser(1, 1, player, "SEDirection");
@@ -333,7 +335,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(0, -2, player, "NDirection");
                 return true;
             }
-            if (MirrorStage6NorthSplitter) {
+            if (MirrorStage7NorthSplitter) {
                 LaserTurnOn(0, player);
                 LaserTurnOn(2, player);
                 ContinueLaser(-1, -1, player, "NWDirection");
@@ -367,7 +369,7 @@ public class Tile : MonoBehaviour
                 ContinueLaser(-1, 1, player, "SWDirection");
                 return true;
             }
-            if (MirrorStage7SouthSplitter) {
+            if (MirrorStage8SouthSplitter) {
                 LaserTurnOn(1, player);
                 LaserTurnOn(3, player);
                 ContinueLaser(0, -2, player, "NDirection");
