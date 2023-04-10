@@ -5,6 +5,8 @@ using UnityEngine;
 public class MirrorChange : MonoBehaviour
 {
     public Tile Tile;
+    public Material material;
+    public bool ColorChangebool;
     // Update is called once per frame
     void Update()
     {
@@ -12,8 +14,23 @@ public class MirrorChange : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        MirrorChangePosition();
+        if (ColorChangebool == true){
+            ColorChange();
+        }
+        else {
+            MirrorChangePosition();
+        }
     }
+    public void ColorChange(){
+        Tile.MirrorStage1NSObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage2NNESSWObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage3NNWSSEObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage4ENEWSWObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage5WNWESEObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage6EWObject.GetComponent<Renderer>().material = material;
+        Tile.MirrorStage9BlockerObject.GetComponent<Renderer>().material = material;
+    }
+
     public void MirrorChangePosition()
     {
         if (Tile.MirrorStage1NS == true)
