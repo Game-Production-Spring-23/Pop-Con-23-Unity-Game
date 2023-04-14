@@ -15,7 +15,7 @@ public class DragDrop : MonoBehaviour
     //int to determine if this item belongs to player 1 or 2
     public int playersItem;
 
-    //int to identify which item this is
+    //int to identify which item this is for the player
     public int itemID;
 
     
