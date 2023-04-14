@@ -43,6 +43,12 @@ public class Tile : MonoBehaviour
     public GameObject MirrorStage8SouthSplitterObject;
     public GameObject MirrorStage9BlockerObject;
 
+    //Indications of whether the tile currently has any items or not
+    public bool isEmpty = true;
+    public bool hasMirror = false;
+    public bool hasSplitter = false;
+    public bool hasBlocker = false;
+
     public bool NorthStart;
     public bool SouthStart;
 
@@ -381,6 +387,29 @@ public class Tile : MonoBehaviour
         }
     }
 
+    void OnMouseOver()
+    {
 
+        Debug.Log("Mouse is over");
+        if (!Input.GetMouseButton(0) && TurnBasedSystem.draggingItem == true && isEmpty == false)
+        {
+            //If statements to act according to which item the player has dropped onto the tile
+            if(TurnBasedSystem.currentItem == 1)
+            {
+                hasMirror = true;
+            }
+
+            else if(TurnBasedSystem.currentItem == 2)
+            {
+                hasSplitter = true;
+            }
+
+            else if(TurnBasedSystem.currentItem == 3)
+            {
+                hasBlocker = true;
+            }
+
+        }
+    }
 
 }

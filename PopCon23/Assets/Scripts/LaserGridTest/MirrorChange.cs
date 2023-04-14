@@ -7,20 +7,42 @@ public class MirrorChange : MonoBehaviour
     public Tile Tile;
     public Material material;
     public bool ColorChangebool;
+
+   
+
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    //Changing the OnMouseDown method so that it only displays items if the player has placed one of their own onto the tile
     public void OnMouseDown()
     {
-        if (ColorChangebool == true){
+        if (ColorChangebool == true)
+        {
             ColorChange();
         }
-        else {
+
+        else if(Tile.hasMirror == true && ColorChangebool == false) 
+        {
+            Tile.isEmpty = false;
             MirrorChangePosition();
         }
+
+        else if(Tile.hasSplitter == true && ColorChangebool == false)
+        {
+            SplitterChangePosition();
+        }
+
+        else if(Tile.hasBlocker == true && ColorChangebool == false)
+        {
+            Tile.MirrorStage9Blocker = true;
+            DisplayBlocker();
+        }
     }
+
+
     public void ColorChange(){
         Tile.MirrorStage1NSObject.GetComponent<Renderer>().material = material;
         Tile.MirrorStage2NNESSWObject.GetComponent<Renderer>().material = material;
@@ -31,7 +53,8 @@ public class MirrorChange : MonoBehaviour
         Tile.MirrorStage9BlockerObject.GetComponent<Renderer>().material = material;
     }
 
-    public void MirrorChangePosition()
+    //I am keeping the original version of this method copied out until I know for certain that my modified version works. Once my version works I will most likely delete this
+    /*public void MirrorChangePosition()
     {
         if (Tile.MirrorStage1NS == true)
         {
@@ -133,5 +156,147 @@ public class MirrorChange : MonoBehaviour
         {
             Tile.MirrorStage9BlockerObject.SetActive(true);
         }
+    }*/
+
+
+   public void MirrorChangePosition()
+   {
+       if (Tile.MirrorStage1NS == true)
+       {
+           Tile.MirrorStage1NS = false;
+           Tile.MirrorStage2NNESSW = true;
+       }
+       else if (Tile.MirrorStage2NNESSW == true)
+       {
+           Tile.MirrorStage2NNESSW = false;
+           Tile.MirrorStage3NNWSSE = true;
+       }
+       else if (Tile.MirrorStage3NNWSSE == true)
+       {
+           Tile.MirrorStage3NNWSSE = false;
+           Tile.MirrorStage4ENEWSW = true;
+       }
+       else if (Tile.MirrorStage4ENEWSW == true)
+       {
+           Tile.MirrorStage4ENEWSW = false;
+           Tile.MirrorStage5WNWESE = true;
+       }
+       else if (Tile.MirrorStage5WNWESE == true)
+       {
+           Tile.MirrorStage5WNWESE = false;
+           Tile.MirrorStage6EW = true;
+       }
+       else if (Tile.MirrorStage6EW == true){
+           Tile.MirrorStage6EW = false;
+            Tile.MirrorStage1NS = true;
+        }
+       else if (Tile.MirrorStage7NorthSplitter == true)
+       {
+           Tile.MirrorStage7NorthSplitter = false;
+           Tile.MirrorStage8SouthSplitter = true;
+       }
+       else if (Tile.MirrorStage8SouthSplitter == true)
+       {
+           Tile.MirrorStage8SouthSplitter = false;
+           Tile.MirrorStage9Blocker = true;
+       }
+       else if (Tile.MirrorStage9Blocker == true)
+       {
+           Tile.MirrorStage9Blocker = false;
+
+       }
+       else
+       {
+           Tile.MirrorStage1NS = true;
+
+       }
+       DisplayMirror();
+       GameManager.instance.LaserFire();
+   }
+   public void DisplayMirror()
+   {
+       Tile.MirrorStage1NSObject.SetActive(false);
+       Tile.MirrorStage2NNESSWObject.SetActive(false);
+       Tile.MirrorStage3NNWSSEObject.SetActive(false);
+       Tile.MirrorStage4ENEWSWObject.SetActive(false);
+       Tile.MirrorStage5WNWESEObject.SetActive(false);
+       Tile.MirrorStage6EWObject.SetActive(false);
+
+
+       if (Tile.MirrorStage1NS == true)
+       {
+           Tile.MirrorStage1NSObject.SetActive(true);
+       }
+       if (Tile.MirrorStage2NNESSW == true)
+       {
+           Tile.MirrorStage2NNESSWObject.SetActive(true);
+       }
+       if (Tile.MirrorStage3NNWSSE == true)
+       {
+           Tile.MirrorStage3NNWSSEObject.SetActive(true);
+       }
+       if (Tile.MirrorStage4ENEWSW == true)
+       {
+           Tile.MirrorStage4ENEWSWObject.SetActive(true);
+       }
+       if (Tile.MirrorStage5WNWESE == true)
+       {
+           Tile.MirrorStage5WNWESEObject.SetActive(true);
+       }
+       if (Tile.MirrorStage6EW == true)
+       {
+           Tile.MirrorStage6EWObject.SetActive(true);
+       }
+       
+   }
+
+    //method used for the splitters to change their position
+    public void SplitterChangePosition()
+    {
+        if (Tile.MirrorStage7NorthSplitter == true)
+        {
+            Tile.MirrorStage7NorthSplitter = false;
+            Tile.MirrorStage8SouthSplitter = true;
+        }
+        else if (Tile.MirrorStage8SouthSplitter == true)
+        {
+            Tile.MirrorStage8SouthSplitter = false;
+            Tile.MirrorStage7NorthSplitter = true;
+        }
+
+        else
+        {
+            Tile.MirrorStage7NorthSplitter = true;
+        }
+
+        DisplaySplitter();
+        GameManager.instance.LaserFire();
     }
+
+    //method to activate and display a blocker if the player has placed it there
+    public void DisplayBlocker()
+    {
+        
+        Tile.MirrorStage9BlockerObject.SetActive(true);
+        GameManager.instance.LaserFire();
+
+    }
+
+    public void DisplaySplitter()
+    {
+        Tile.MirrorStage7NorthSplitterObject.SetActive(false);
+        Tile.MirrorStage8SouthSplitterObject.SetActive(false);
+
+        //Displaying the splitters
+        if (Tile.MirrorStage7NorthSplitter == true)
+        {
+            Tile.MirrorStage7NorthSplitterObject.SetActive(true);
+        }
+        if (Tile.MirrorStage8SouthSplitter == true)
+        {
+            Tile.MirrorStage8SouthSplitterObject.SetActive(true);
+        }
+    }
+
+    
 }
