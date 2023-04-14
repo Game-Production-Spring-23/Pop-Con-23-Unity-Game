@@ -1036,6 +1036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303514630719160057}
   - component: {fileID: 1302636039118072921}
+  - component: {fileID: 2353237629815971730}
   m_Layer: 0
   m_Name: LaserTile
   m_TagString: Untagged
@@ -1121,8 +1122,25 @@ MonoBehaviour:
   MirrorStage7NorthSplitterObject: {fileID: 8229684636472233193}
   MirrorStage8SouthSplitterObject: {fileID: 2034846736439072129}
   MirrorStage9BlockerObject: {fileID: 1122545143131802123}
+  isEmpty: 0
+  hasMirror: 0
+  hasSplitter: 0
+  hasBlocker: 0
   NorthStart: 0
   SouthStart: 0
+--- !u!65 &2353237629815971730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990599282665513227}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.55665076}
+  m_Center: {x: -0, y: 0, z: -0.22167543}
 --- !u!1 &2014268392567220092
 GameObject:
   m_ObjectHideFlags: 0
