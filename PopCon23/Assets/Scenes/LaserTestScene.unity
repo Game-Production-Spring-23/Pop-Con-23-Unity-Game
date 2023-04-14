@@ -453,7 +453,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -503,11 +503,12 @@ MonoBehaviour:
   GridTile: {fileID: 1302636039118072921, guid: b372bae18c2a99440affb01eecf66911, type: 3}
   ColumnLength: 13
   RowHeight: 13
-  tileHeight: 0.66
-  tileWidth: 0.99
+  tileHeight: 0.58
+  tileWidth: 0.91
   InventoryItem: {fileID: 7413834032937931811, guid: 5fc6082742089874a94e66ca8012fe08, type: 3}
   Player1Inventory: []
   Player2Inventory: []
+  Player1Turn: 1
 --- !u!4 &769214073
 Transform:
   m_ObjectHideFlags: 0
@@ -627,7 +628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

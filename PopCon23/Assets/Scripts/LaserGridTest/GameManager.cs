@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public Item[] Player1Inventory;
     public Item[] Player2Inventory;
 
+    public bool Player1Turn;
+
     private void Awake()
     {
         instance = this;
@@ -65,7 +67,10 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
+        gridArray[8,10].RedCrystal = true;
+        gridArray[8,10].CrystalGeneration();
+        gridArray[4,2].BlueCrystal = true;
+        gridArray[4,2].CrystalGeneration();
         gridArray[10, 12].StartLaser(gridArray[10, 12].Player1Color, "NDirection");
         gridArray[2, 0].StartLaser(gridArray[2, 0].Player2Color, "SDirection"); 
     }

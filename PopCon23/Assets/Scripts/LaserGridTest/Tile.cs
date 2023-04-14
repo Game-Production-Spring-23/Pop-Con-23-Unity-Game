@@ -20,8 +20,12 @@ public class Tile : MonoBehaviour
     */
     public Material Player1Color;
     public Material Player2Color;
+    public Material RedShieldColor;
+    public Material BlueShieldColor;
     public Material Crossbeams;
 
+    //OUTDATED Old Bools for Mirrors
+    
     public bool MirrorStage1NS;
     public bool MirrorStage2NNESSW;
     public bool MirrorStage3NNWSSE;
@@ -32,7 +36,7 @@ public class Tile : MonoBehaviour
     public bool MirrorStage8SouthSplitter;
     public bool MirrorStage9Blocker;
 
-
+    // GameObjects for Mirror Placement
     public GameObject MirrorStage1NSObject;
     public GameObject MirrorStage2NNESSWObject;
     public GameObject MirrorStage3NNWSSEObject;
@@ -43,6 +47,7 @@ public class Tile : MonoBehaviour
     public GameObject MirrorStage8SouthSplitterObject;
     public GameObject MirrorStage9BlockerObject;
 
+
     //Indications of whether the tile currently has any items or not
     public bool isEmpty = true;
     public bool hasMirror = false;
@@ -52,6 +57,40 @@ public class Tile : MonoBehaviour
     public bool NorthStart;
     public bool SouthStart;
 
+    public SpriteRenderer CrystalRenderer;
+    public Sprite RedCrystalSprite;
+    public Sprite BlueCrystalSprite;
+    public Sprite RedHitCrystalSprite;
+    public Sprite BlueHitCrystalSprite;
+
+    [HideInInspector] // Shielded Entry Bools
+    public bool NorthShield;
+    [HideInInspector]
+    public bool SouthShield;
+    [HideInInspector]
+    public bool NorthEastShield;
+    [HideInInspector]
+    public bool NorthWestShield;
+    [HideInInspector]
+    public bool SouthEastShield;
+    [HideInInspector]
+    public bool SouthWestShield;
+
+    // GameObjects for Shields
+    public GameObject NorthWall;
+    public GameObject NorthEastWall;
+    public GameObject SouthEastWall;
+    public GameObject SouthWall;
+    public GameObject SouthWestWall;
+    public GameObject NorthWestWall;
+
+    [HideInInspector] // Crystal Bools
+    public bool RedCrystal;
+    [HideInInspector]
+    public bool BlueCrystal;
+    private bool RedHasBeenHit;
+    private bool BlueHasBeenHit;
+
     void Start()
     {
     }
@@ -59,7 +98,13 @@ public class Tile : MonoBehaviour
     {
         switch (direction){
             case "SEDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(2, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
@@ -75,7 +120,13 @@ public class Tile : MonoBehaviour
                 }
             break;
             case "SWDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(4, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
                     if (LaserReflect(4, player) == false)
@@ -90,7 +141,13 @@ public class Tile : MonoBehaviour
                 }
             break;
             case "NEDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(1, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
                     if (LaserReflect(1, player) == false)
@@ -105,7 +162,13 @@ public class Tile : MonoBehaviour
                 }
             break;
             case "NWDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(5, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
                     if (LaserReflect(5, player) == false)
@@ -120,7 +183,13 @@ public class Tile : MonoBehaviour
                 }
             break;
             case "NDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(0, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
@@ -136,7 +205,13 @@ public class Tile : MonoBehaviour
                 }
             break;
             case "SDirection":
+                if (!ShieldCheck(direction)){
+                    return;
+                }
                 LaserTurnOn(3, player);
+                if (!CrystalHitCheck(direction)){
+                    return;
+                }
                 // IF NE PATH IS LAST PATH, CALL HEX NE OF CURRENT HEX
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
@@ -411,5 +486,164 @@ public class Tile : MonoBehaviour
 
         }
     }
+    public void CrystalGeneration(){
+        if (RedCrystal){
+            CrystalRenderer.sprite = RedCrystalSprite;
+        }
+        if (BlueCrystal){
+            CrystalRenderer.sprite = BlueCrystalSprite;
+        }
 
+    }
+    public bool CrystalHitCheck(string direction){
+        if (RedCrystal) {
+            if (!GameManager.instance.Player1Turn){
+                CrystalRenderer.sprite = RedHitCrystalSprite;
+                switch (direction){
+                    case "SEDirection":
+                        SouthEastShield = true;
+                        SouthShield = true;
+                        NorthEastShield = true;
+                        SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                    case "SWDirection":
+                        SouthWestShield = true;
+                        SouthShield = true;
+                        NorthWestShield = true;
+                        SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                    case "NEDirection":
+                        NorthEastShield = true;
+                        NorthShield = true;
+                        SouthEastShield = true;
+                        NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                    case "NWDirection":
+                        NorthWestShield = true;
+                        NorthShield = true;
+                        SouthWestShield = true;
+                        NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                    case "NDirection":
+                        NorthShield = true;
+                        NorthEastShield = true;
+                        NorthWestShield = true;
+                        NorthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                    case "SDirection":
+                        SouthShield = true;
+                        SouthWestShield = true;
+                        SouthEastShield = true;
+                        SouthWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                    break;
+                }
+                return false;
+            }
+        }
+        if (BlueCrystal){
+            Debug.Log("Test");
+            if (GameManager.instance.Player1Turn){
+                CrystalRenderer.sprite = BlueHitCrystalSprite;
+                switch (direction){
+                    case "SEDirection":
+                        SouthEastShield = true;
+                        SouthShield = true;
+                        NorthEastShield = true;
+                        SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                    case "SWDirection":
+                        SouthWestShield = true;
+                        SouthShield = true;
+                        NorthWestShield = true;
+                        SouthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                    case "NEDirection":
+                        NorthEastShield = true;
+                        NorthShield = true;
+                        SouthEastShield = true;
+                        NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                    case "NWDirection":
+                        NorthWestShield = true;
+                        NorthShield = true;
+                        SouthWestShield = true;
+                        NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                    case "NDirection":
+                        NorthShield = true;
+                        NorthEastShield = true;
+                        NorthWestShield = true;
+                        NorthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                    case "SDirection":
+                        SouthShield = true;
+                        SouthWestShield = true;
+                        SouthEastShield = true;
+                        SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
+                        SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
+                    break;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+    public bool ShieldCheck(string direction){
+        switch (direction){
+            case "SEDirection":
+            if (SouthEastShield){
+                return false;
+            }
+            break;
+            case "SWDirection":
+            if (SouthWestShield){
+                return false;
+            }
+            break;
+            case "NEDirection":
+            if (NorthEastShield){
+                return false;
+            }
+            break;
+            case "NWDirection":
+            if (NorthWestShield){
+                return false;
+            }
+            break;
+            case "NDirection":
+            if (NorthShield){
+                return false;
+            }
+            break;
+            case "SDirection":
+            if (SouthShield){
+                return false;
+            }
+            break;
+        }
+        return true;
+    }
 }
