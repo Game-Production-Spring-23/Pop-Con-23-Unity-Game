@@ -328,7 +328,19 @@ public class MirrorChange : MonoBehaviour
         Tile.hasSplitter = false;
         Tile.hasBlocker = false;
         Tile.personalMirror = false;
-        
+
+        Tile.MirrorStage1NS = false; ;
+        Tile.MirrorStage2NNESSW = false;
+        Tile.MirrorStage3NNWSSE = false;
+        Tile.MirrorStage4ENEWSW = false;
+        Tile.MirrorStage5WNWESE = false;
+        Tile.MirrorStage6EW = false;
+        Tile.MirrorStage7NorthSplitter = false;
+        Tile.MirrorStage8SouthSplitter = false;
+        Tile.MirrorStage9Blocker = false;
+
+        GameManager.instance.LaserFire();
+
 
     }
 
