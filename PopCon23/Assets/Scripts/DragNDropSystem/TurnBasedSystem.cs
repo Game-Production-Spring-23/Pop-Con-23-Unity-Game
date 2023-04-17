@@ -32,6 +32,8 @@ public class TurnBasedSystem : MonoBehaviour
     //static bool that will prevent players from dragging new items onto the board if they have already made an action
     public static bool canDrag = true;
 
+    public static bool beginNextTurn = false;
+
     //apublic arrays to instantiate the item prefabs
     public GameObject[] Items;
     public Vector3[] ItemSpawn;
@@ -44,7 +46,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     void Start()
     {
-        //BeginTurn();
+        BeginTurn();
     }
 
     void Update()
@@ -106,6 +108,12 @@ public class TurnBasedSystem : MonoBehaviour
             resetItem = false;
         }
 
+        if(beginNextTurn == true)
+        {
+            BeginTurn();
+            beginNextTurn = false;
+        }
+
     }
 
     public void BeginTurn()
@@ -136,12 +144,73 @@ public class TurnBasedSystem : MonoBehaviour
         //we will instantiate the items based on the random numbers generated
         for(int i = 0; i < 3; i++)
         {
+          //Vector3 itemPosition = new Vector3(356, 158, 0);  
+          if(ranNums[i] <= 23)
+            {
+                GameObject item1 = Instantiate(Items[0], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[0], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+          
+          else if(ranNums[i] > 23 && ranNums[i] <= 37)
+            {
+                GameObject item1 = Instantiate(Items[1], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[1], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+
+          else if(ranNums[i] > 37 && ranNums[i] <= 46)
+            {
+                GameObject item1 = Instantiate(Items[2], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[2], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+
+          else if(ranNums[i] > 46 && ranNums[i] <= 50)
+            {
+                GameObject item1 = Instantiate(Items[3], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[3], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+
+          else if(ranNums[i] > 50 && ranNums[i] <= 54)
+            {
+                GameObject item1 = Instantiate(Items[4], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[4], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+
+          else if(ranNums[i] > 54 && ranNums[i] <= 68)
+            {
+                GameObject item1 = Instantiate(Items[5], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[5], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+
+          else if(ranNums[i] > 68 && ranNums[i] <= 78)
+            {
+                GameObject item1 = Instantiate(Items[6], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                GameObject item2 = Instantiate(Items[6], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            }
+            else
+            {
+                //nothing
+            }
+
+         
             
-            
-          GameObject item1 = Instantiate(Items[0], ItemSpawn[i], Quaternion.identity);
-            item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-          Instantiate(Items[0], ItemSpawn[i + 3], Quaternion.identity);
-            
+          
+
         }
     }
+
+    
 }

@@ -675,7 +675,7 @@ public class Tile : MonoBehaviour
         //check to see if a big rock was used
         if(usedBigRock == true)
         {
-            Debug.Log("UsedBigRock");
+            
      
            collided.gameObject.GetComponent<Tile>().usedRock = true;
             

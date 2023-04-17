@@ -25,8 +25,9 @@ public class DragDrop : MonoBehaviour
     {
         startingPosition = this.transform.position;
 
-        
-        
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+
+
     }
 
 
