@@ -16,12 +16,14 @@ public class MirrorChange : MonoBehaviour
         if(Tile.usedRock == true)
         {
             UseRock();
+            
         }
 
         if(Tile.usedRotator == true)
         {
             Rotate();
         }
+        
     }
 
     //Changing the OnMouseDown method so that it only displays items if the player has placed one of their own onto the tile
@@ -326,6 +328,7 @@ public class MirrorChange : MonoBehaviour
         Tile.hasSplitter = false;
         Tile.hasBlocker = false;
         Tile.personalMirror = false;
+        
 
     }
 
@@ -346,6 +349,11 @@ public class MirrorChange : MonoBehaviour
             {
                 Debug.Log("Personal Mirror Testing");
                 Tile.SetTurn();
+            }
+
+            else
+            {
+                TurnBasedSystem.canDrag = true;
             }
         }
 
