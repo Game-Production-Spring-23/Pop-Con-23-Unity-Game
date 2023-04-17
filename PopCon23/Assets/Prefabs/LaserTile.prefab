@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 1510494303064462799}
   - component: {fileID: 4780290145600260553}
   m_Layer: 0
-  m_Name: SouthEastWall
+  m_Name: NorthWestWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1148,13 +1148,14 @@ MonoBehaviour:
   SouthEastShield: 0
   SouthWestShield: 0
   NorthWall: {fileID: 685466623829649132}
-  NorthEastWall: {fileID: 444639840685989611}
-  SouthEastWall: {fileID: 5309968171139015499}
+  NorthEastWall: {fileID: 811859948359149855}
+  SouthEastWall: {fileID: 3049630470192758875}
   SouthWall: {fileID: 2503162442340898094}
-  SouthWestWall: {fileID: 3049630470192758875}
-  NorthWestWall: {fileID: 811859948359149855}
+  SouthWestWall: {fileID: 5309968171139015499}
+  NorthWestWall: {fileID: 444639840685989611}
   RedCrystal: 0
   BlueCrystal: 0
+  CrystalHit: 
 --- !u!65 &2353237629815971730
 BoxCollider:
   m_ObjectHideFlags: 0

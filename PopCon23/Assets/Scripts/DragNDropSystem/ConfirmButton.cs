@@ -37,9 +37,12 @@ public class ConfirmButton : MonoBehaviour
             TurnBasedSystem.turnNumber++;
             TurnBasedSystem.nextTurn = false;
             if (GameManager.instance.Player1Turn == true){
+                GameManager.instance.gridArray[4,2].ShieldsOn();
                 GameManager.instance.Player1Turn = false;
             }
             else {
+                GameManager.instance.Player1Turn = true;
+                GameManager.instance.gridArray[8,10].ShieldsOn();
                 GameManager.instance.Player1Turn = true;
             }
             TurnBasedSystem.canDrag = true;
