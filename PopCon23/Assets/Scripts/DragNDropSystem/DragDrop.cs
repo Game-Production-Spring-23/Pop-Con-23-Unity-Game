@@ -7,7 +7,7 @@ public class DragDrop : MonoBehaviour
 {
 
     [SerializeField]
-    private Canvas canvas;
+    public Canvas canvas;
 
     //variable to snap back the 
     private Vector3 startingPosition;
@@ -19,9 +19,13 @@ public class DragDrop : MonoBehaviour
     public int itemID;
 
     
+
+    
     void Start()
     {
         startingPosition = this.transform.position;
+
+        
         
     }
 
@@ -31,7 +35,7 @@ public class DragDrop : MonoBehaviour
     {
 
         //only drag the item if it is this players turn
-        if(TurnBasedSystem.playerTurn == this.playersItem)
+        if(TurnBasedSystem.playerTurn == this.playersItem && TurnBasedSystem.isHovering == false && TurnBasedSystem.canDrag == true)
         {
             PointerEventData pointerData = (PointerEventData)data;
             Vector2 position;
@@ -49,13 +53,15 @@ public class DragDrop : MonoBehaviour
 
     public void BeginDraggingMethod()
     {
-        if(TurnBasedSystem.playerTurn == this.playersItem)
+        if(TurnBasedSystem.playerTurn == this.playersItem && TurnBasedSystem.isHovering == false && TurnBasedSystem.canDrag == true)
         {
             //indicate that they are dragging an item
             TurnBasedSystem.draggingItem = true;
 
             //let the game know which item is being dragged
             TurnBasedSystem.currentItem = itemID;
+
+            TurnBasedSystem.draggedItem = this;
         }
         
 
@@ -68,7 +74,17 @@ public class DragDrop : MonoBehaviour
         TurnBasedSystem.draggingItem = false;
 
 
-        //I am setting it up so whenever you stop dragging the object, it will return to it's placeholder spot
+
+        if(TurnBasedSystem.isHovering == false)
+        {
+            //I am setting it up so whenever you stop dragging the object, it will return to it's placeholder spot
+            this.transform.position = startingPosition;
+        }
+        
+    }
+
+    public void ReplaceItem()
+    {
         this.transform.position = startingPosition;
     }
 

@@ -13,30 +13,40 @@ public class MirrorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Tile.usedRock == true)
+        {
+            UseRock();
+        }
+
+        if(Tile.usedRotator == true)
+        {
+            Rotate();
+        }
     }
 
     //Changing the OnMouseDown method so that it only displays items if the player has placed one of their own onto the tile
     public void OnMouseDown()
     {
-        if (ColorChangebool == true)
+        if (ColorChangebool == true && Tile.personalMirror == true)
         {
             ColorChange();
         }
 
-        else if(Tile.hasMirror == true && ColorChangebool == false) 
+        else if((Tile.hasMirror == true || Tile.personalMirror == true) && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber) 
         {
             Tile.isEmpty = false;
             MirrorChangePosition();
         }
 
-        else if(Tile.hasSplitter == true && ColorChangebool == false)
+        else if(Tile.hasSplitter == true && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
         {
+            Tile.isEmpty = false;
             SplitterChangePosition();
         }
 
         else if(Tile.hasBlocker == true && ColorChangebool == false)
         {
+            Tile.isEmpty = false;
             Tile.MirrorStage9Blocker = true;
             DisplayBlocker();
         }
@@ -298,5 +308,50 @@ public class MirrorChange : MonoBehaviour
         }
     }
 
+    //rock method
+    public void UseRock()
+    {
+        Tile.usedRock = false;
+        Tile.MirrorStage1NSObject.SetActive(false);
+        Tile.MirrorStage2NNESSWObject.SetActive(false);
+        Tile.MirrorStage3NNWSSEObject.SetActive(false);
+        Tile.MirrorStage4ENEWSWObject.SetActive(false);
+        Tile.MirrorStage5WNWESEObject.SetActive(false);
+        Tile.MirrorStage6EWObject.SetActive(false);
+        Tile.MirrorStage7NorthSplitterObject.SetActive(false);
+        Tile.MirrorStage8SouthSplitterObject.SetActive(false);
+        Tile.MirrorStage9BlockerObject.SetActive(false);
+
+        Tile.hasMirror = false;
+        Tile.hasSplitter = false;
+        Tile.hasBlocker = false;
+        Tile.personalMirror = false;
+
+    }
+
+    //rotation method
+    public void Rotate()
+    {
+
+        //in the case where a personal mirror is not present
+        if(Tile.personalMirror == false)
+        {
+            Tile.SetTurn();
+        }
+
+        else if(Tile.personalMirror == true)
+        {
+            //check to see that the correct player is trying to rotate their personal mirror
+            if(Tile.personalMirrorOwner == (TurnBasedSystem.turnNumber % 2))
+            {
+                Debug.Log("Personal Mirror Testing");
+                Tile.SetTurn();
+            }
+        }
+
+        Tile.usedRotator = false;
+        
+        
+    }
     
 }

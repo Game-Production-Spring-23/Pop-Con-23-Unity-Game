@@ -53,6 +53,11 @@ public class Tile : MonoBehaviour
     public bool hasMirror = false;
     public bool hasSplitter = false;
     public bool hasBlocker = false;
+    public bool usedRock = false;
+    public bool usedRotator = false;
+    public bool usedBigRock = false;
+    public bool personalMirror = false;
+    public int personalMirrorOwner;
 
     public bool NorthStart;
     public bool SouthStart;
@@ -90,6 +95,9 @@ public class Tile : MonoBehaviour
     public bool BlueCrystal;
     private bool RedHasBeenHit;
     private bool BlueHasBeenHit;
+
+    //method to check which turn the player is currently on
+    private int curTurn = 1;
 
     void Start()
     {
@@ -468,24 +476,25 @@ public class Tile : MonoBehaviour
         Debug.Log("Mouse is over");
         if (!Input.GetMouseButton(0) && TurnBasedSystem.draggingItem == true && isEmpty == false)
         {
-            //If statements to act according to which item the player has dropped onto the tile
-            if(TurnBasedSystem.currentItem == 1)
-            {
-                hasMirror = true;
-            }
+            TurnBasedSystem.curTile = this;
 
-            else if(TurnBasedSystem.currentItem == 2)
-            {
-                hasSplitter = true;
-            }
-
-            else if(TurnBasedSystem.currentItem == 3)
-            {
-                hasBlocker = true;
-            }
+            TurnBasedSystem.isHovering = true;
 
         }
+
+        //in the case where the player is trying to drop either a rock or a rotator over an existing item
+        else if(!Input.GetMouseButton(0) && TurnBasedSystem.draggingItem == true && (TurnBasedSystem.currentItem == 4 || TurnBasedSystem.currentItem == 5 || TurnBasedSystem.currentItem == 7))
+        {
+
+            TurnBasedSystem.curTile = this;
+
+            TurnBasedSystem.isHovering = true;
+
+        }
+
     }
+
+    
     public void CrystalGeneration(){
         if (RedCrystal){
             CrystalRenderer.sprite = RedCrystalSprite;
@@ -646,4 +655,35 @@ public class Tile : MonoBehaviour
         }
         return true;
     }
+
+
+    //getters and setters for the curTurn int variable
+    public void SetTurn()
+    {
+        curTurn = TurnBasedSystem.turnNumber;
+    }
+
+    public int GetTurn()
+    {
+        return curTurn;
+    }
+
+    //we are going to check if a big rock was used
+    void OnTriggerStay(Collider collided)
+    {
+
+        //check to see if a big rock was used
+        if(usedBigRock == true)
+        {
+            Debug.Log("UsedBigRock");
+     
+           collided.gameObject.GetComponent<Tile>().usedRock = true;
+            
+
+            usedBigRock = false;
+        }
+        
+    }
+
+
 }
