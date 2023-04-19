@@ -94,6 +94,8 @@ public class TurnBasedSystem : MonoBehaviour
                 curTile.usedRock = true;
             }
 
+            curTile.InitSpawn();
+
             confirmAction = false;
 
             isHovering = false;
@@ -179,9 +181,9 @@ public class TurnBasedSystem : MonoBehaviour
 
           else if(ranNums[i] > 50 && ranNums[i] <= 54)
             {
-                GameObject item1 = Instantiate(Items[4], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                GameObject item1 = Instantiate(Items[6], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
                 item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-                GameObject item2 = Instantiate(Items[4], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                GameObject item2 = Instantiate(Items[6], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
                 item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
             }
 
@@ -195,9 +197,9 @@ public class TurnBasedSystem : MonoBehaviour
 
           else if(ranNums[i] > 68 && ranNums[i] <= 78)
             {
-                GameObject item1 = Instantiate(Items[6], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
+                GameObject item1 = Instantiate(Items[4], ItemSpawn[i], Quaternion.Euler(new Vector3(0, 0, -90)));
                 item1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-                GameObject item2 = Instantiate(Items[6], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
+                GameObject item2 = Instantiate(Items[4], ItemSpawn[i + 3], Quaternion.Euler(new Vector3(0, 0, -90)));
                 item2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
             }
             else
