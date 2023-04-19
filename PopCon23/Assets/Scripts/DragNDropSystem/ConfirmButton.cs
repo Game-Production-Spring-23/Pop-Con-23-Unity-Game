@@ -41,7 +41,6 @@ public class ConfirmButton : MonoBehaviour
                 GameManager.instance.Player1Turn = false;
             }
             else {
-                GameManager.instance.Player1Turn = true;
                 GameManager.instance.gridArray[8,10].ShieldsOn();
                 GameManager.instance.Player1Turn = true;
             }

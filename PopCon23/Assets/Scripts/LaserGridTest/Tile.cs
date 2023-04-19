@@ -89,9 +89,8 @@ public class Tile : MonoBehaviour
     public GameObject SouthWestWall;
     public GameObject NorthWestWall;
 
-    [HideInInspector] // Crystal Bools
+ // Crystal Bools
     public bool RedCrystal;
-    [HideInInspector]
     public bool BlueCrystal;
     private bool RedHasBeenHit;
     private bool BlueHasBeenHit;
@@ -512,27 +511,21 @@ public class Tile : MonoBehaviour
                 switch (direction){
                     case "SEDirection":
                         CrystalHit = "SEDirection";
-                        return false;
                     break;
                     case "SWDirection":
                         CrystalHit = "SWDirection";
-                        return false;
                     break;
                     case "NEDirection":
                         CrystalHit = "NEDirection";
-                        return false;
                     break;
                     case "NWDirection":
                         CrystalHit = "NWDirection";
-                        return false;
                     break;
                     case "NDirection":
                         CrystalHit = "NDirection";
-                        return false;
                     break;
                     case "SDirection":
                         CrystalHit = "SDirection";
-                        return false;
                     break;
                 }
                 return false;
@@ -543,27 +536,21 @@ public class Tile : MonoBehaviour
                 switch (direction){
                     case "SEDirection":
                         CrystalHit = "SEDirection";
-                        return false;
                     break;
                     case "SWDirection":
                         CrystalHit = "SWDirection";
-                        return false;
                     break;
                     case "NEDirection":
                         CrystalHit = "NEDirection";
-                        return false;
                     break;
                     case "NWDirection":
                         CrystalHit = "NWDirection";
-                        return false;
                     break;
                     case "NDirection":
                         CrystalHit = "NDirection";
-                        return false;
                     break;
                     case "SDirection":
                         CrystalHit = "SDirection";
-                        return false;
                     break;
                 }
                 return false;
@@ -638,16 +625,19 @@ public class Tile : MonoBehaviour
 
     public void ShieldsOn(){
         if (RedCrystal) {
+            Debug.Log("AAAAAAAAA");
             if (!GameManager.instance.Player1Turn){
-                CrystalRenderer.sprite = RedHitCrystalSprite;
+                Debug.Log("AAAAAAAAA");
                 switch (CrystalHit){
                     case "SEDirection":
+                        Debug.Log("AAAAAAAAA");
                         SouthEastShield = true;
                         SouthShield = true;
                         NorthEastShield = true;
                         SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                     case "SWDirection":
                         SouthWestShield = true;
@@ -656,6 +646,7 @@ public class Tile : MonoBehaviour
                         SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                     case "NEDirection":
                         NorthEastShield = true;
@@ -664,6 +655,7 @@ public class Tile : MonoBehaviour
                         NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                     case "NWDirection":
                         NorthWestShield = true;
@@ -672,6 +664,7 @@ public class Tile : MonoBehaviour
                         NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                     case "NDirection":
                         NorthShield = true;
@@ -680,6 +673,7 @@ public class Tile : MonoBehaviour
                         NorthWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                     case "SDirection":
                         SouthShield = true;
@@ -688,6 +682,7 @@ public class Tile : MonoBehaviour
                         SouthWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
+                        CrystalRenderer.sprite = RedHitCrystalSprite;
                     break;
                 }
             }
