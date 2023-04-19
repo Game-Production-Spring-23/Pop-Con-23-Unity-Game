@@ -7,6 +7,9 @@ public class GantryConroller : MonoBehaviour
 {
     VoltageRatioInput sliderX;
     VoltageRatioInput sliderY;
+
+    VoltageRatioInput pressure;
+
     public Transform railPos;
     public Transform manipPos;
     public Transform targetPos;
@@ -17,6 +20,7 @@ public class GantryConroller : MonoBehaviour
     {
         sliderX = new VoltageRatioInput();
         sliderY = new VoltageRatioInput();
+        pressure = new VoltageRatioInput();
 
         sliderX.Channel = 0;
         sliderX.Open(Phidget.DefaultTimeout);
@@ -25,13 +29,18 @@ public class GantryConroller : MonoBehaviour
         sliderY.Channel = 1;
         sliderY.Open(Phidget.DefaultTimeout);
         sliderY.DataInterval = 16;
+
+        pressure.Channel = 2;
+        pressure.Open(Phidget.DefaultTimeout);
+        pressure.DataInterval = 16;
     }
 
     // Update is called once per frame
     void Update()
     {
-        railPos.position = new Vector3(x: (float)sliderX.VoltageRatio * -20, y: -3.5f);
-        manipPos.position = new Vector3(x: railPos.position.x, y: (float)sliderY.VoltageRatio * -7);
+        targetPos.position = new Vector3(x: (float)sliderX.VoltageRatio * -20, y: (float)sliderY.VoltageRatio * -7);
+        railPos.position = Vector3.MoveTowards(railPos.position, new Vector3(x: targetPos.position.x, y: railPos.position.y), speed);
+        manipPos.position = Vector3.MoveTowards(manipPos.position, new Vector3(x: railPos.position.x, y: targetPos.position.y), speed);
         Debug.Log((float)sliderX.VoltageRatio);
     }
 }
