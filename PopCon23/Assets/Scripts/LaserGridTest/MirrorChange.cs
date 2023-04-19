@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MirrorChange : MonoBehaviour
 {
-    public Tile Tile;
+    [SerializeField] public static Tile Tile;
     public Material material;
     public bool ColorChangebool;
 
@@ -13,6 +13,9 @@ public class MirrorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Tile == null){
+            return;
+        }
         if(Tile.usedRock == true)
         {
             UseRock();
@@ -200,7 +203,7 @@ public class MirrorChange : MonoBehaviour
        }
        else if (Tile.MirrorStage6EW == true){
            Tile.MirrorStage6EW = false;
-            Tile.MirrorStage1NS = true;
+           Tile.MirrorStage1NS = true;
         }
        else if (Tile.MirrorStage7NorthSplitter == true)
        {
@@ -215,7 +218,6 @@ public class MirrorChange : MonoBehaviour
        else if (Tile.MirrorStage9Blocker == true)
        {
            Tile.MirrorStage9Blocker = false;
-
        }
        else
        {

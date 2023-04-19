@@ -478,7 +478,7 @@ public class Tile : MonoBehaviour
         if (!Input.GetMouseButton(0) && TurnBasedSystem.draggingItem == true && isEmpty == false)
         {
             TurnBasedSystem.curTile = this;
-
+            MirrorChange.Tile = this;
             TurnBasedSystem.isHovering = true;
 
         }
@@ -625,12 +625,9 @@ public class Tile : MonoBehaviour
 
     public void ShieldsOn(){
         if (RedCrystal) {
-            Debug.Log("AAAAAAAAA");
             if (!GameManager.instance.Player1Turn){
-                Debug.Log("AAAAAAAAA");
                 switch (CrystalHit){
                     case "SEDirection":
-                        Debug.Log("AAAAAAAAA");
                         SouthEastShield = true;
                         SouthShield = true;
                         NorthEastShield = true;
