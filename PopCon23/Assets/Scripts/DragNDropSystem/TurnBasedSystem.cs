@@ -94,7 +94,7 @@ public class TurnBasedSystem : MonoBehaviour
                 curTile.usedRock = true;
             }
 
-            curTile.InitSpawn();
+           // curTile.InitSpawn();
 
             confirmAction = false;
 

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject EmergencyButtonControls;
 
-    // Update is called once per frame
-    void Update()
+    public void EmergencyButtonToggle()
     {
-        
+        if (EmergencyButtonControls.activeSelf == false){
+            EmergencyButtonControls.SetActive(true);
+        }
+        else
+        {
+            EmergencyButtonControls.SetActive(false);
+        }
     }
 }

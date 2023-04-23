@@ -67,10 +67,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        gridArray[8,10].RedCrystal = true;
-        gridArray[8,10].CrystalGeneration();
-        gridArray[4,2].BlueCrystal = true;
-        gridArray[4,2].CrystalGeneration();
         gridArray[10, 12].StartLaser(gridArray[10, 12].Player1Color, "NDirection");
         gridArray[2, 0].StartLaser(gridArray[2, 0].Player2Color, "SDirection"); 
     }
@@ -101,6 +97,13 @@ public class GameManager : MonoBehaviour
 
             //         gridArray[i, j] = (Tile)Instantiate(GridTile, new Vector2(i * 1.675f + 1.675f, j * 1.1f), Quaternion.identity);
         }
+        Vector3 CrystalOffSet = new Vector3(0, 0, 1f);
+        gridArray[8, 10].transform.position += CrystalOffSet;
+        gridArray[4, 2].transform.position += CrystalOffSet;
+        gridArray[8, 10].RedCrystal = true;
+        gridArray[8, 10].CrystalGeneration();
+        gridArray[4, 2].BlueCrystal = true;
+        gridArray[4, 2].CrystalGeneration();
     }
 
     public void FillInventory(){
