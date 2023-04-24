@@ -29,17 +29,7 @@ public class MirrorChange : MonoBehaviour
             Rotate();
         }
 
-        //remove the blocker after a set amount of turns
-        if (Tile.hasBlocker == true && ((TurnBasedSystem.turnNumber - Tile.blockerTurn) > 3))
-        {
-            Tile.hasBlocker = false;
-            Tile.MirrorStage9Blocker = false;
-            Tile.MirrorStage9BlockerObject.SetActive(false);
-            Debug.Log("Removing the blocker!");
-            GameManager.instance.LaserFire();
-
-
-        }
+        
 
     }
 

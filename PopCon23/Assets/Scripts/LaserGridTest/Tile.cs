@@ -105,6 +105,21 @@ public class Tile : MonoBehaviour
     {
     }
 
+    void Update()
+    {
+        //remove the blocker after a set amount of turns
+        if (hasBlocker == true && ((TurnBasedSystem.turnNumber - blockerTurn) > 3))
+        {
+            hasBlocker = false;
+            MirrorStage9Blocker = false;
+            MirrorStage9BlockerObject.SetActive(false);
+            Debug.Log("Removing the blocker!");
+            GameManager.instance.LaserFire();
+
+
+        }
+    }
+
     public void StartLaser(Material player, string direction)
     {
         switch (direction){
@@ -752,4 +767,6 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+
 }

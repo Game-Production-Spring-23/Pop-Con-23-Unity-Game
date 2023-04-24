@@ -38,6 +38,9 @@ public class TurnBasedSystem : MonoBehaviour
     public GameObject[] Items;
     public Vector3[] ItemSpawn;
 
+    //number of times nothing is 
+    public int nothing = 0;
+
 
 
 
@@ -67,7 +70,7 @@ public class TurnBasedSystem : MonoBehaviour
 
             else if(currentItem == 3)
             {
-                curTile.blockerTurn = 0;
+                curTile.blockerTurn = turnNumber;
                 curTile.hasBlocker = true;
             }
 
@@ -141,6 +144,7 @@ public class TurnBasedSystem : MonoBehaviour
         int ran3 = Random.Range(1, 100);
 
         int[] ranNums = { ran1, ran2, ran3 };
+        nothing = 0;
 
         SpawnInventory(ranNums);
     }
@@ -210,7 +214,14 @@ public class TurnBasedSystem : MonoBehaviour
             }
             else
             {
-                //nothing
+                //add to the number of nothing values
+                nothing++;
+            }
+
+          //if no items spawned, reroll
+          if(nothing == 3)
+            {
+                BeginTurn();
             }
 
          
