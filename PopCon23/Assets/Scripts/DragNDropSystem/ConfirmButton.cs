@@ -16,6 +16,10 @@ public class ConfirmButton : MonoBehaviour
             TurnBasedSystem.nextTurn = true;
 
             TurnBasedSystem.canDrag = false;
+
+            
+
+
         }
     }
 

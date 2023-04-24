@@ -60,29 +60,34 @@ public class TurnBasedSystem : MonoBehaviour
             {
                 curTile.hasMirror = true;
                 curTile.SetTurn();
+                curTile.initSpawn = true;
             }
 
             else if(currentItem == 2)
             {
                 curTile.hasSplitter = true;
                 curTile.SetTurn();
+                curTile.initSpawn = true;
             }
 
             else if(currentItem == 3)
             {
                 curTile.blockerTurn = turnNumber;
                 curTile.hasBlocker = true;
+                curTile.initSpawn = true;
             }
 
             //in the case where a player uses a rock
             else if(currentItem == 4)
             {
                 curTile.usedRock = true;
+                curTile.initSpawn = true;
             }
 
             else if(currentItem == 5)
             {
                 curTile.usedRotator = true;
+                curTile.initSpawn = true;
             }
 
             else if(currentItem == 6)
@@ -90,12 +95,14 @@ public class TurnBasedSystem : MonoBehaviour
                 curTile.personalMirrorOwner = turnNumber % 2;
                 curTile.personalMirror = true;
                 curTile.SetTurn();
+                curTile.initSpawn = true;
             }
 
             else if(currentItem == 7)
             {
                 curTile.usedBigRock = true;
                 curTile.usedRock = true;
+                curTile.initSpawn = true;
             }
 
            // curTile.InitSpawn();
@@ -230,6 +237,10 @@ public class TurnBasedSystem : MonoBehaviour
 
         }
     }
+
+    
+
+
 
     
 }

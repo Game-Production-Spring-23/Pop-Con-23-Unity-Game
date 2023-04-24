@@ -29,6 +29,12 @@ public class MirrorChange : MonoBehaviour
             Rotate();
         }
 
+
+        //checking to see if the item was just placed
+        if(Tile.initSpawn == true)
+        {
+            InitSpawn();
+        }
         
 
     }
@@ -275,6 +281,35 @@ public class MirrorChange : MonoBehaviour
         Tile.usedRotator = false;
         
         
+    }
+
+    public void InitSpawn()
+    {
+        if (ColorChangebool == true && Tile.personalMirror == true)
+        {
+            ColorChange();
+        }
+
+        else if ((Tile.hasMirror == true || Tile.personalMirror == true) && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
+        {
+            Tile.isEmpty = false;
+            MirrorChangePosition();
+        }
+
+        else if (Tile.hasSplitter == true && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
+        {
+            Tile.isEmpty = false;
+            SplitterChangePosition();
+        }
+
+        else if (Tile.hasBlocker == true && ColorChangebool == false)
+        {
+            Tile.isEmpty = false;
+            Tile.MirrorStage9Blocker = true;
+            DisplayBlocker();
+        }
+
+        Tile.initSpawn = false;
     }
     
 }

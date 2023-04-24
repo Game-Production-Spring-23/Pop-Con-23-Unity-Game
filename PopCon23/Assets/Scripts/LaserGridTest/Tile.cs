@@ -53,6 +53,7 @@ public class Tile : MonoBehaviour
     public bool hasMirror = false;
     public bool hasSplitter = false;
     public bool hasBlocker = false;
+    public bool initSpawn = false;
     public int blockerTurn;
     public bool usedRock = false;
     public bool usedRotator = false;
@@ -108,7 +109,7 @@ public class Tile : MonoBehaviour
     void Update()
     {
         //remove the blocker after a set amount of turns
-        if (hasBlocker == true && ((TurnBasedSystem.turnNumber - blockerTurn) > 3))
+        if (hasBlocker == true && ((TurnBasedSystem.turnNumber - blockerTurn) > 2))
         {
             hasBlocker = false;
             MirrorStage9Blocker = false;
@@ -497,6 +498,7 @@ public class Tile : MonoBehaviour
             TurnBasedSystem.curTile = this;
             MirrorChange.Tile = this;
             TurnBasedSystem.isHovering = true;
+            initSpawn = true;
 
         }
 
