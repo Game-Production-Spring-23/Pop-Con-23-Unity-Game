@@ -53,6 +53,7 @@ public class Tile : MonoBehaviour
     public bool hasMirror = false;
     public bool hasSplitter = false;
     public bool hasBlocker = false;
+    public int blockerTurn;
     public bool usedRock = false;
     public bool usedRotator = false;
     public bool usedBigRock = false;
@@ -103,6 +104,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
     }
+
     public void StartLaser(Material player, string direction)
     {
         switch (direction){

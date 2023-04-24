@@ -8,6 +8,8 @@ public class MirrorChange : MonoBehaviour
     public Material material;
     public bool ColorChangebool;
 
+    
+
    
 
     // Update is called once per frame
@@ -26,7 +28,19 @@ public class MirrorChange : MonoBehaviour
         {
             Rotate();
         }
-        
+
+        //remove the blocker after a set amount of turns
+        if (Tile.hasBlocker == true && ((TurnBasedSystem.turnNumber - Tile.blockerTurn) > 3))
+        {
+            Tile.hasBlocker = false;
+            Tile.MirrorStage9Blocker = false;
+            Tile.MirrorStage9BlockerObject.SetActive(false);
+            Debug.Log("Removing the blocker!");
+            GameManager.instance.LaserFire();
+
+
+        }
+
     }
 
     //Changing the OnMouseDown method so that it only displays items if the player has placed one of their own onto the tile

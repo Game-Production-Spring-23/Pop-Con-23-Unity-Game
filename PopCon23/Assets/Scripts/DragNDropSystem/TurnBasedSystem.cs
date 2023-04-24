@@ -67,6 +67,7 @@ public class TurnBasedSystem : MonoBehaviour
 
             else if(currentItem == 3)
             {
+                curTile.blockerTurn = 0;
                 curTile.hasBlocker = true;
             }
 
@@ -101,7 +102,12 @@ public class TurnBasedSystem : MonoBehaviour
             isHovering = false;
 
             //set the tiles current turn to whatever this files current turn number is
-            
+
+
+
+
+    
+
         }
 
         if(resetItem == true)
