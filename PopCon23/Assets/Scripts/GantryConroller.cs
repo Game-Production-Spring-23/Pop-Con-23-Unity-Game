@@ -13,6 +13,8 @@ public class GantryConroller : MonoBehaviour
     public Transform railPos;
     public Transform manipPos;
     public Transform targetPos;
+
+    public float pressureThreshold;
     public float speed;
 
     // Start is called before the first frame update
@@ -40,7 +42,12 @@ public class GantryConroller : MonoBehaviour
     {
         targetPos.position = new Vector3(x: (float)sliderX.VoltageRatio * -20, y: (float)sliderY.VoltageRatio * -7);
         railPos.position = Vector3.MoveTowards(railPos.position, new Vector3(x: targetPos.position.x, y: railPos.position.y), speed);
-        manipPos.position = Vector3.MoveTowards(manipPos.position, new Vector3(x: railPos.position.x, y: targetPos.position.y), speed);
-        Debug.Log((float)sliderX.VoltageRatio);
+        manipPos.position = Vector3.MoveTowards(manipPos.position, new Vector3(x: railPos.position.x, y: manipPos.position.y), speed * 30);
+        manipPos.position = Vector3.MoveTowards(manipPos.position, new Vector3(x: manipPos.position.x, y: targetPos.position.y), speed);
+        
+        if(pressure.VoltageRatio > pressureThreshold)
+        {
+            Debug.Log("Pushy....");
+        }
     }
 }

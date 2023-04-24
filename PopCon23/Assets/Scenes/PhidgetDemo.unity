@@ -207,11 +207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &566588250 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5677094673740395066, guid: 0a55c766ad20ae54ba0fa262d7514218, type: 3}
-  m_PrefabInstance: {fileID: 1188535673}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1188535673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,12 +271,8 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9006122153892057107, guid: 0a55c766ad20ae54ba0fa262d7514218, type: 3}
-      propertyPath: manipPos
-      value: 
-      objectReference: {fileID: 566588250}
-    - target: {fileID: 9006122153892057107, guid: 0a55c766ad20ae54ba0fa262d7514218, type: 3}
-      propertyPath: targetPos
-      value: 
+      propertyPath: pressureThreshold
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a55c766ad20ae54ba0fa262d7514218, type: 3}
