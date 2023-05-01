@@ -1102,8 +1102,8 @@ MonoBehaviour:
   - {fileID: 6096002469735660025}
   - {fileID: 6337690310815675432}
   - {fileID: 3003224943277416639}
-  Player1Color: {fileID: 2100000, guid: 02973eed605bd7d47a7d30ba0ba54916, type: 2}
-  Player2Color: {fileID: 2100000, guid: 3eb503f3a6d01184bbde0f77429ae654, type: 2}
+  Player1Color: {fileID: 2100000, guid: b4473f35dcca38b43b603aaff0a0280e, type: 2}
+  Player2Color: {fileID: 2100000, guid: 58c4138e99131a443a0426e1dbb6f87c, type: 2}
   RedShieldColor: {fileID: 2100000, guid: 2bc78cd74e0845b45a6ab471f2d5af9c, type: 2}
   BlueShieldColor: {fileID: 2100000, guid: c4947e82196515641b4799bb6c4e6fe0, type: 2}
   Crossbeams: {fileID: 2100000, guid: cff0ef7ba76475341914e96bb3840e97, type: 2}
@@ -1129,6 +1129,7 @@ MonoBehaviour:
   hasMirror: 0
   hasSplitter: 0
   hasBlocker: 0
+  blockerTurn: 0
   usedRock: 0
   usedRotator: 0
   usedBigRock: 0

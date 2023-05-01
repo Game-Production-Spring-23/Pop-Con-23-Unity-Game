@@ -91,7 +91,7 @@ public class Tile : MonoBehaviour
     public GameObject SouthWestWall;
     public GameObject NorthWestWall;
 
- // Crystal Bools
+    // Crystal Bools
     public bool RedCrystal;
     public bool BlueCrystal;
     private bool RedHasBeenHit;
@@ -121,8 +121,14 @@ public class Tile : MonoBehaviour
         }
     }
 
+    // StartLaser fires the lasers from an entry direction centered on this tile
     public void StartLaser(Material player, string direction)
-    {
+    {   /*  
+            Switch Statment checks which direction the laser is coming into. 
+            First statement blocks laser from spawning if shield is active, laser then turns on and checks if tile is a crystal
+            If there is no crystal third check looks for a mirror on the tile, if so runs laser reflect to figure out which direction laser goes
+            If no mirror laser will continue and call the next tile to continue the path
+        */
         switch (direction){
             case "SEDirection":
                 if (!ShieldCheck(direction)){
@@ -132,7 +138,6 @@ public class Tile : MonoBehaviour
                 if (!CrystalHitCheck(direction)){
                     return;
                 }
-                // IF SW PATH IS LAST PATH, CALL HEX SW OF CURRENT HEX
                 if (MirrorStage1NS || MirrorStage2NNESSW || MirrorStage3NNWSSE || MirrorStage4ENEWSW || MirrorStage5WNWESE || MirrorStage6EW || MirrorStage7NorthSplitter || MirrorStage8SouthSplitter || MirrorStage9Blocker)
                 {
                     if (LaserReflect(2, player) == false)
@@ -259,7 +264,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    //Tells Tile Next door according to where the laser comes out to start their laser script
+    //Tells Tile Next door according to where the laser comes out to start their laser script, if no tile cancels out to prevent errors.
     public void ContinueLaser(int x, int y, Material player, string direction)
     {
         try 
@@ -276,6 +281,11 @@ public class Tile : MonoBehaviour
     }
     public bool LaserReflect(int entry, Material player)
     {
+        /*
+            LaserReflect script has two checks.
+            The first check uses the direction previous called upon in StartLaser from 0 to 5 going clockwise from north
+            The second check checks all the mirror bools to then turn on the reflection direction and call the tile in the new direction to continue the laser
+        */
         switch (entry){
             case 0:
                 if (MirrorStage2NNESSW)
@@ -457,8 +467,8 @@ public class Tile : MonoBehaviour
                 }
                 if (MirrorStage4ENEWSW)
                 {
-                    LaserTurnOn(5, player);
-                    ContinueLaser(1, 1, player, "SEDirection");
+                    LaserTurnOn(0, player);
+                    ContinueLaser(0, 2, player, "SDirection");
                     return true;
                 }
                 if (MirrorStage6EW)
@@ -480,9 +490,11 @@ public class Tile : MonoBehaviour
     }
     public void LaserTurnOn(int entryPoint, Material player)
     {
+        // If the laser already has a laser active, turn the laser to the crossbeams laser color
         if (paths[entryPoint].activeSelf == true) {
             paths[entryPoint].GetComponent<Renderer>().material = Crossbeams;
         }
+        // If the laser does not already have a laser active, turn on the laser to players color
         else {
             paths[entryPoint].SetActive(true);
             paths[entryPoint].GetComponent<Renderer>().material = player;
@@ -516,6 +528,7 @@ public class Tile : MonoBehaviour
 
     
     public void CrystalGeneration(){
+        // If crystal has crystal boolean (declared in gamemanager start script) sets the renderer sprite to the color stated.
         if (RedCrystal){
             CrystalRenderer.sprite = RedCrystalSprite;
         }
@@ -525,8 +538,10 @@ public class Tile : MonoBehaviour
 
     }
     public bool CrystalHitCheck(string direction){
-        if (RedCrystal) {
-            if (!GameManager.instance.Player1Turn){
+        /*
+            Crystal Hit Check is checked when the laser is called upon in StartLaser, if either boolean is true sets string varible to direction
+        */
+        if (RedCrystal || BlueCrystal) {
                 switch (direction){
                     case "SEDirection":
                         CrystalHit = "SEDirection";
@@ -548,36 +563,13 @@ public class Tile : MonoBehaviour
                     break;
                 }
                 return false;
-            }
-        }
-        if (BlueCrystal) {
-            if (GameManager.instance.Player1Turn){
-                switch (direction){
-                    case "SEDirection":
-                        CrystalHit = "SEDirection";
-                    break;
-                    case "SWDirection":
-                        CrystalHit = "SWDirection";
-                    break;
-                    case "NEDirection":
-                        CrystalHit = "NEDirection";
-                    break;
-                    case "NWDirection":
-                        CrystalHit = "NWDirection";
-                    break;
-                    case "NDirection":
-                        CrystalHit = "NDirection";
-                    break;
-                    case "SDirection":
-                        CrystalHit = "SDirection";
-                    break;
-                }
-                return false;
-            }
         }
         return true;
     }
     public bool ShieldCheck(string direction){
+        /*
+            Shield Check checks the laser coming in and if the shield booleans are on returns so the laser doesn't pass through.
+        */
         switch (direction){
             case "SEDirection":
             if (SouthEastShield){
@@ -643,10 +635,17 @@ public class Tile : MonoBehaviour
     }
 
     public void ShieldsOn(){
+        /*
+            Shields On Script is called when the End Turn button is clicked in ConfirmButton.cs
+            Script checks if string CrystalHit variable which was set in CrystalHitCheck
+            It then checks if the oncoming laser color is the opposite player to prevent friendly fire.
+            If opposite player, the tile will turn the walls where the laser is, and one clockwise and counter clockwise to the players color
+            and turns on the booleans for the shields
+        */
         if (RedCrystal) {
-            if (!GameManager.instance.Player1Turn){
                 switch (CrystalHit){
                     case "SEDirection":
+                        if (paths[2].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         SouthEastShield = true;
                         SouthShield = true;
                         NorthEastShield = true;
@@ -654,8 +653,10 @@ public class Tile : MonoBehaviour
                         SouthWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
                     case "SWDirection":
+                        if (paths[4].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         SouthWestShield = true;
                         SouthShield = true;
                         NorthWestShield = true;
@@ -663,8 +664,10 @@ public class Tile : MonoBehaviour
                         SouthWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
                     case "NEDirection":
+                        if (paths[1].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         NorthEastShield = true;
                         NorthShield = true;
                         SouthEastShield = true;
@@ -672,8 +675,10 @@ public class Tile : MonoBehaviour
                         NorthWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
                     case "NWDirection":
+                        if (paths[5].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         NorthWestShield = true;
                         NorthShield = true;
                         SouthWestShield = true;
@@ -681,8 +686,10 @@ public class Tile : MonoBehaviour
                         NorthWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
                     case "NDirection":
+                        if (paths[0].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         NorthShield = true;
                         NorthEastShield = true;
                         NorthWestShield = true;
@@ -690,8 +697,10 @@ public class Tile : MonoBehaviour
                         NorthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
                     case "SDirection":
+                        if (paths[3].GetComponent<Renderer>().sharedMaterial == Player2Color) {
                         SouthShield = true;
                         SouthWestShield = true;
                         SouthEastShield = true;
@@ -699,15 +708,14 @@ public class Tile : MonoBehaviour
                         SouthWestWall.GetComponent<Renderer>().material = RedShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = RedShieldColor;
                         CrystalRenderer.sprite = RedHitCrystalSprite;
+                        }
                     break;
-                }
             }
         }
         if (BlueCrystal){
-            Debug.Log("Test");
-            if (GameManager.instance.Player1Turn){
                 switch (CrystalHit){
                     case "SEDirection":
+                        if (paths[2].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         SouthEastShield = true;
                         SouthShield = true;
                         NorthEastShield = true;
@@ -715,8 +723,10 @@ public class Tile : MonoBehaviour
                         SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
                         NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
                     case "SWDirection":
+                        if (paths[4].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         SouthWestShield = true;
                         SouthShield = true;
                         NorthWestShield = true;
@@ -724,8 +734,10 @@ public class Tile : MonoBehaviour
                         SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
                     case "NEDirection":
+                        if (paths[1].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         NorthEastShield = true;
                         NorthShield = true;
                         SouthEastShield = true;
@@ -733,21 +745,21 @@ public class Tile : MonoBehaviour
                         NorthWall.GetComponent<Renderer>().material = BlueShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
                     case "NWDirection":
-                        Debug.Log("AAAAAAAA");
+                        if (paths[5].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         NorthWestShield = true;
                         NorthShield = true;
                         SouthWestShield = true;
                         NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
                         NorthWall.GetComponent<Renderer>().material = BlueShieldColor;
                         SouthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
-                       // NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
-                        //SouthWall.GetComponent<Renderer>().material = BlueShieldColor;
-                        //SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
                     case "NDirection":
+                        if (paths[0].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         NorthShield = true;
                         NorthEastShield = true;
                         NorthWestShield = true;
@@ -755,8 +767,10 @@ public class Tile : MonoBehaviour
                         NorthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
                         NorthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
                     case "SDirection":
+                        if (paths[3].GetComponent<Renderer>().sharedMaterial == Player1Color) {
                         SouthShield = true;
                         SouthWestShield = true;
                         SouthEastShield = true;
@@ -764,8 +778,8 @@ public class Tile : MonoBehaviour
                         SouthWestWall.GetComponent<Renderer>().material = BlueShieldColor;
                         SouthEastWall.GetComponent<Renderer>().material = BlueShieldColor;
                         CrystalRenderer.sprite = BlueHitCrystalSprite;
+                        }
                     break;
-                }
             }
         }
     }
