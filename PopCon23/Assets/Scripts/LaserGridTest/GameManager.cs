@@ -24,6 +24,25 @@ public class GameManager : MonoBehaviour
         Invoke("LaserFire", 5);   // Fires Lasers after 5 seconds
     }
 
+    void Update()
+    {
+        if (TurnBasedSystem.curTile != null && TurnBasedSystem.curTile.createShockwave == true)
+        {
+            //make it so each tile near the current tile is also affected by the rock
+            Debug.Log("Big rock initiate!!!!!");
+            gridArray[(TurnBasedSystem.curTile.x_cord + 1), (TurnBasedSystem.curTile.y_cord + 1)].usedBigRock = true;
+            gridArray[(TurnBasedSystem.curTile.x_cord - 1), (TurnBasedSystem.curTile.y_cord + 1)].usedBigRock = true;
+            gridArray[(TurnBasedSystem.curTile.x_cord + 1), (TurnBasedSystem.curTile.y_cord - 1)].usedBigRock = true;
+            gridArray[(TurnBasedSystem.curTile.x_cord - 1), (TurnBasedSystem.curTile.y_cord - 1)].usedBigRock = true;
+            gridArray[(TurnBasedSystem.curTile.x_cord), (TurnBasedSystem.curTile.y_cord + 2)].usedBigRock = true;
+            gridArray[(TurnBasedSystem.curTile.x_cord), (TurnBasedSystem.curTile.y_cord - 2)].usedBigRock = true;
+            TurnBasedSystem.curTile.createShockwave = false;
+
+
+        }
+
+    }
+
     public void LaserFire()
     {
         for (int i = 0; i < ColumnLength; i++) // Resets grid lasers

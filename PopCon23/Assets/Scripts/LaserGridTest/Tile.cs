@@ -59,6 +59,7 @@ public class Tile : MonoBehaviour
     public bool usedRotator = false;
     public bool usedBigRock = false;
     public bool personalMirror = false;
+    public bool createShockwave = false;
     public int personalMirrorOwner;
 
     public bool NorthStart;
@@ -118,6 +119,11 @@ public class Tile : MonoBehaviour
             GameManager.instance.LaserFire();
 
 
+        }
+
+        if(usedBigRock == true)
+        {
+            MakeEmpty();
         }
     }
 
@@ -784,5 +790,43 @@ public class Tile : MonoBehaviour
         }
     }
 
+    //method to wipe out anything currently inside of this tile
+    public void MakeEmpty()
+    {
+        usedRock = false;
+        MirrorStage1NSObject.SetActive(false);
+        MirrorStage2NNESSWObject.SetActive(false);
+        MirrorStage3NNWSSEObject.SetActive(false);
+        MirrorStage4ENEWSWObject.SetActive(false);
+        MirrorStage5WNWESEObject.SetActive(false);
+        MirrorStage6EWObject.SetActive(false);
+        MirrorStage7NorthSplitterObject.SetActive(false);
+        MirrorStage8SouthSplitterObject.SetActive(false);
+        MirrorStage9BlockerObject.SetActive(false);
+
+        hasMirror = false;
+        hasSplitter = false;
+        hasBlocker = false;
+        personalMirror = false;
+
+        MirrorStage1NS = false;
+        MirrorStage2NNESSW = false;
+        MirrorStage3NNWSSE = false;
+        MirrorStage4ENEWSW = false;
+        MirrorStage5WNWESE = false;
+        MirrorStage6EW = false;
+        MirrorStage7NorthSplitter = false;
+        MirrorStage8SouthSplitter = false;
+        MirrorStage9Blocker = false;
+        Debug.Log("Using the big rock!");
+
+        usedBigRock = false;
+
+        GameManager.instance.LaserFire();
+
+    }
+
 
 }
+
+

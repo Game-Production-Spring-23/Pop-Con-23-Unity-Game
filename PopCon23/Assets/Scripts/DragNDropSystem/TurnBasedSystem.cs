@@ -101,8 +101,8 @@ public class TurnBasedSystem : MonoBehaviour
             else if(currentItem == 7)
             {
                 curTile.usedBigRock = true;
-                curTile.usedRock = true;
                 curTile.initSpawn = true;
+                curTile.createShockwave = true;
             }
 
            // curTile.InitSpawn();
@@ -224,6 +224,9 @@ public class TurnBasedSystem : MonoBehaviour
                 //add to the number of nothing values
                 nothing++;
             }
+            
+
+            
 
           //if no items spawned, reroll
           if(nothing == 3)

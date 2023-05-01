@@ -282,18 +282,15 @@ public class MirrorChange : MonoBehaviour
         
         
     }
-
+    
     public void InitSpawn()
     {
-        if (ColorChangebool == true && Tile.personalMirror == true)
-        {
-            ColorChange();
-        }
 
-        else if ((Tile.hasMirror == true || Tile.personalMirror == true) && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
+        if ((Tile.hasMirror == true || Tile.personalMirror == true) && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
         {
             Tile.isEmpty = false;
             MirrorChangePosition();
+
         }
 
         else if (Tile.hasSplitter == true && ColorChangebool == false && Tile.GetTurn() == TurnBasedSystem.turnNumber)
