@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
                     gridArray[i, j].paths[2].SetActive(false);
                     gridArray[i, j].paths[0].SetActive(false);
                     gridArray[i, j].paths[3].SetActive(false);
+                    gridArray[i,j].CrystalHit = null;
                 }
             }
             else
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
                     gridArray[i, j].paths[2].SetActive(false);
                     gridArray[i, j].paths[0].SetActive(false);
                     gridArray[i, j].paths[3].SetActive(false);
+                    gridArray[i,j].CrystalHit = null;
                 }
             }
         }
